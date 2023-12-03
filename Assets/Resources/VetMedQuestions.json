@@ -1,0 +1,99 @@
+{
+  "questions": [
+    {
+      "question": "What are the core vaccines for a feline patient?",
+      "answers": {
+        "A": "Corona and FVRCP",
+        "B": "Corona and FeLV",
+        "C": "Rabies and FVRCP",
+        "D": "Rabies and Influenza"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What parts of a patient's should to be restrained for a lateral exam?",
+      "answers": {
+        "A": "Ears and Tongue",
+        "B": "Head and Hind end",
+        "C": "Cute little Nose and Toes",
+        "D": "Head and Front Paws"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What are the core vaccines for a canine patient?",
+      "answers": {
+        "A": "Rabies, DHLPP, Bordetella",
+        "B": "Lepto, Lyme, Influenza",
+        "C": "LPV, Lyme, Rabies",
+        "D": "Rabies, CPV, Bordetella"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What is 'FeLV'?",
+      "answers": {
+        "A": "Feline Licking Vaccine",
+        "B": "Feral Less Violent",
+        "C": "Fetal Lorax Virus",
+        "D": "Feline Leukemia Virus"
+      },
+      "correctAnswerIndex": "4"
+    },
+    {
+      "question": "What is 'FIV'?",
+      "answers": {
+        "A": "Feline Immunodeficiency Virus",
+        "B": "Fatal Intoxication Volume",
+        "C": "Form Insulin Vaccine",
+        "D": "Frightening Individual Vermin"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "A 4DX tests for the following:",
+      "answers": {
+        "A": "Heartworm, Lyme Disease, Ehrlicia and Leptosporosis",
+        "B": "Leptosporosis, Lyme, Rabies and Parvovirus",
+        "C": "Heartworm, Lyme Disease, Ehrlicia and Anaplasma",
+        "D": "Rabies, Parvo, Kennel Cough and Cushings Disease"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "The client is the pet.",
+      "answers": {
+        "A": "True",
+        "B": "False"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "Exam rooms should be spot cleaned between each appointment.",
+      "answers": {
+        "A": "True",
+        "B": "False"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "A Fecal Flotation tests for all the following parasites, EXCEPT:",
+      "answers": {
+        "A": "Round worms",
+        "B": "Nematodes",
+        "C": "Hookworm",
+        "D": "Giardia"
+      },
+      "correctAnswerIndex": "4"
+    },
+    {
+      "question": "A client with no money is not a client at all.",
+      "answers": {
+        "A": "True",
+        "B": "False",
+        "C": "It depends on the severity of the patient’s health"
+      },
+      "correctAnswerIndex": "3"
+    }
+  ]
+}
