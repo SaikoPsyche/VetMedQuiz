@@ -117,14 +117,19 @@ public class QuizManager : MonoBehaviour
                     {
                         TestTaker tester = JsonUtility.FromJson<TestTaker>(savedJsonData);
 
+                        if (tester.testerName == "" || tester.testerName == null)
+                        {
+                            tester.testerName = "Scholar";
+                        }
+
                         tester.level = SceneManager.GetActiveScene().buildIndex;
                         tester.score = this.score;
                         EventManager.SaveData(tester);
 
                         scoreText.text = $"{tester.testerName} earned a score of {score * 10}%!"; // score out of 10 questions * 10 gives percent.
 
-                        savedJsonData = File.ReadAllText(filePath);
-                        Debug.Log("Loaded: " + savedJsonData);
+                        /*savedJsonData = File.ReadAllText(filePath);
+                        Debug.Log("Loaded: " + savedJsonData);*/
                     }
 
                 }

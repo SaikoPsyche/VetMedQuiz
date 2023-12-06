@@ -9,9 +9,15 @@ using UnityEngine.SceneManagement;
 public class StartScreenManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private GameObject levelScreen;
 
     public void SaveData()
     {
         EventManager.AddTester(nameText.text);
+    }
+
+    public void LoadLevelScreen()
+    {
+        levelScreen.SetActive(true);
     }
 }

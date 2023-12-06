@@ -1,0 +1,104 @@
+{
+  "questions": [
+    {
+      "question": "A Fecal Flotation tests for all the following parasites, EXCEPT:",
+      "answers": {
+        "A": "Round worms",
+        "B": "Nematodes",
+        "C": "Hookworm",
+        "D": "Giardia"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What is a purple top tube used for?",
+      "answers": {
+        "A": "Collecting reproductive samples (semen, eggs)",
+        "B": "Collecting whole blood to spin down for plasma.",
+        "C": "Collecting Whole Blood",
+        "D": "It's a sterile tube that can be used for any type of sample."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What is the Distemper vaccine for?",
+      "answers": {
+        "A": "The distemper vaccine makes dogs behave better, by controlling their temper.",
+        "B": "To prevent Rabies virus",
+        "C": "To prevent certain species of ticks",
+        "D": "The Distemper vaccine contains a combination of 4 to 5 vaccines that prevent different GI and Upper Respiratory diseases."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What is dermataphyte? WHat is the best way to test for it?",
+      "answers": {
+        "A": "It is a bacterium thats tested for by checking a skin cytology.",
+        "B": "It is a fungus thats tested for by taking a sample of the fur and growing that sample on a sterile medium or running a Dermatophyte PCR.",
+        "C": "It is a protozoa that tested for by checking a fecal floation",
+        "D": "It is a fungus thats tested for by checking a fecal smear."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What is the difference between a LIPOMA and PAPILLOMA?",
+      "answers": {
+        "A": "They are the same thing.",
+        "B": "A lipoma is a pimple and a papilloma is a zit.",
+        "C": "A lipoma is benign fatty mass and a papilloma is benign wart.",
+        "D": "A lipoma is a cancerous tumour and a papilloma is a benign tumour."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "Which of the following species can contract Rabies?",
+      "answers": {
+        "A": "Only mammalian species can contract Rabies.",
+        "B": "Eagles, Pythons, Humans, Whales, and Canines.",
+        "C": "Iguanas, Vipers, Axolotls, Salamanders, and Geckos.",
+        "D": "Orangutans, Snails, Clams, Mussels, Octopi"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "What position should a patient be in for a right lateral abdominal radiograph?",
+      "answers": {
+        "A": "Laying on their back.",
+        "B": "Laying with their left side down.",
+        "C": "Laying on their sternum.",
+        "D": "Laying with their right side down."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "How do you test for ear mites?",
+      "answers": {
+        "A": "Get a skin scrapinhg for a skin cytology.",
+        "B": "Check an ear cytology.",
+        "C": "Run a fecal flotation.",
+        "D": "Run a 4DX."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What position should a patient be in for a OFA radiograph of the hips?",
+      "answers": {
+        "A": "Sternal recumbency",
+        "B": "Right lateral recumbency",
+        "C": "Dorsal recumbency",
+        "D": "Cranial recumbency"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "Which of the following is NOT a way to test for fleas?",
+      "answers": {
+        "A": "Check a fecal smear under the microscope.",
+        "B": "Check for flea dirt using a black light.",
+        "C": "Use a flea comb to remove fleas from the fur.",
+        "D": "Comb out a small amount of fur and use peroxide to check for flea dirt."
+      },
+      "correctAnswerIndex": "0"
+    }
+  ]
+}

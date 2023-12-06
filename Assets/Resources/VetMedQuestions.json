@@ -8,17 +8,17 @@
         "C": "Rabies and FVRCP",
         "D": "Rabies and Influenza"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "2"
     },
     {
-      "question": "What parts of a patient's should to be restrained for a lateral exam?",
+      "question": "What parts of a patient's body should be restrained for a lateral exam?",
       "answers": {
-        "A": "Ears and Tongue",
-        "B": "Head and Hind end",
+        "A": "Just the ears",
+        "B": "Head and Hind paws",
         "C": "Cute little Nose and Toes",
         "D": "Head and Front Paws"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "1"
     },
     {
       "question": "What are the core vaccines for a canine patient?",
@@ -28,7 +28,7 @@
         "C": "LPV, Lyme, Rabies",
         "D": "Rabies, CPV, Bordetella"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "0"
     },
     {
       "question": "What is 'FeLV'?",
@@ -38,7 +38,7 @@
         "C": "Fetal Lorax Virus",
         "D": "Feline Leukemia Virus"
       },
-      "correctAnswerIndex": "4"
+      "correctAnswerIndex": "3"
     },
     {
       "question": "What is 'FIV'?",
@@ -48,7 +48,7 @@
         "C": "Form Insulin Vaccine",
         "D": "Frightening Individual Vermin"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "0"
     },
     {
       "question": "A 4DX tests for the following:",
@@ -58,7 +58,7 @@
         "C": "Heartworm, Lyme Disease, Ehrlicia and Anaplasma",
         "D": "Rabies, Parvo, Kennel Cough and Cushings Disease"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "2"
     },
     {
       "question": "The client is the pet.",
@@ -66,7 +66,7 @@
         "A": "True",
         "B": "False"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "1"
     },
     {
       "question": "Exam rooms should be spot cleaned between each appointment.",
@@ -74,17 +74,17 @@
         "A": "True",
         "B": "False"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "0"
     },
     {
-      "question": "A Fecal Flotation tests for all the following parasites, EXCEPT:",
+      "question": "What is a tiger top tube used for?",
       "answers": {
-        "A": "Round worms",
-        "B": "Nematodes",
-        "C": "Hookworm",
-        "D": "Giardia"
+        "A": "Collecting whole blood to spin down for plasma.",
+        "B": "Collecting whole blood to spin down for serum.",
+        "C": "Shooting darts at fractious cats.",
+        "D": "Distributing precise amounts of blood."
       },
-      "correctAnswerIndex": "4"
+      "correctAnswerIndex": "1"
     },
     {
       "question": "A client with no money is not a client at all.",
@@ -93,7 +93,7 @@
         "B": "False",
         "C": "It depends on the severity of the patient’s health"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "2"
     }
   ]
 }
