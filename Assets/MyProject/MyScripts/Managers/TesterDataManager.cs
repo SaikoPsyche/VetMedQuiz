@@ -14,6 +14,12 @@ public class TesterDataManager : MonoBehaviour
     {
         EventManager.OnAddTester += AddTester;
         EventManager.OnSaveData += SaveTesterData;
+        EventManager.OnSetDifficulty += SetDifficulty;
+    }
+
+    private void Start()
+    {
+        tester = new();
     }
 
     public void SaveTesterData(TestTaker testTaker)
@@ -33,13 +39,12 @@ public class TesterDataManager : MonoBehaviour
 
     public void AddTester(string testerName)
     {
-        tester = new TestTaker
-        {
-            level = SceneManager.GetActiveScene().buildIndex,
-            testerName = testerName,
-            score = 0
-        };
+        tester.testerName = testerName;
+    }
 
+    public void SetDifficulty(int difficulty)
+    {
+        tester.difficulty = difficulty;
         SaveTesterData(tester);
     }
 
@@ -47,5 +52,6 @@ public class TesterDataManager : MonoBehaviour
     {
         EventManager.OnAddTester -= AddTester;
         EventManager.OnSaveData -= SaveTesterData;
+        EventManager.OnSetDifficulty -= SetDifficulty;
     }
 }

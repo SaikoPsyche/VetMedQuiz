@@ -16,6 +16,11 @@ public class StartScreenManager : MonoBehaviour
         EventManager.AddTester(nameText.text);
     }
 
+    public void SetDifficulty(int difficulty)
+    {
+        EventManager.SetDifficulty(difficulty);
+    }
+
     public void LoadLevelScreen()
     {
         levelScreen.SetActive(true);

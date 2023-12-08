@@ -94,6 +94,10 @@ public class QuizManager : MonoBehaviour
         // increment the score.
         if (answerIndex == currentQuestion.correctAnswerIndex) score++;
 
+        // Play click sound based on answer choice.
+        bool isCorrect = answerIndex == currentQuestion.correctAnswerIndex;
+        EventManager.CorrectAnswer(isCorrect);
+
         // Increment the current question index.
         _currentQuestionIndex++;
 
@@ -122,7 +126,6 @@ public class QuizManager : MonoBehaviour
                             tester.testerName = "Scholar";
                         }
 
-                        tester.level = SceneManager.GetActiveScene().buildIndex;
                         tester.score = this.score;
                         EventManager.SaveData(tester);
 

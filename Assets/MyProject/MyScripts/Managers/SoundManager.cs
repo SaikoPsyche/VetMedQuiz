@@ -1,24 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource bgMusic;
-    [SerializeField] private AudioSource clickSound;
+    [SerializeField] private AudioSource bgAudio;
+    [SerializeField] private AudioSource clickAudio;
+    [SerializeField] private AudioSource correctAnsAudio;
+    [SerializeField] private AudioSource incorrectAnsAudio;
 
-    public void PlayClickSound()
+    private void OnEnable()
     {
-        clickSound.Play();
+        EventManager.OnCorrectAnswer += PlayAnsAudio;
     }
 
-    public void MuteClickSound()
+    public void PlayClickAudio()
     {
-        clickSound.mute = true;
+        clickAudio.Play();
+    }
+
+    public void UnMuteClickAudio()
+    {
+        clickAudio.mute = false;
+        correctAnsAudio.mute = false;
+        incorrectAnsAudio.mute = false;
+    }
+
+    public void PlayBgAudio()
+    {
+        bgAudio.mute = false;
+    }
+
+    public void MuteClickAudio()
+    {
+        clickAudio.mute = true;
+        correctAnsAudio.mute = true;
+        incorrectAnsAudio.mute = true;
     }
 
     public void MuteBGAudio()
     {
-        bgMusic.mute = true;
+        bgAudio.mute = true;
+    }
+
+    private void PlayAnsAudio(bool isCorrect)
+    {
+        switch(isCorrect)
+        {
+            case true: 
+                correctAnsAudio.Play(); 
+                break;
+            case false: 
+                incorrectAnsAudio.Play(); 
+                break;
+        }
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnCorrectAnswer -= PlayAnsAudio;
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TestTaker
 {
-    public int level;
     public string testerName;
+    public int difficulty;
     public int score;
 
     public TestTaker()
