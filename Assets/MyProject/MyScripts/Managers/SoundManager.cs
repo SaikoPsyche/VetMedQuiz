@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SoundManager : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class SoundManager : MonoBehaviour
         bgAudio.mute = true;
     }
 
-    private void PlayAnsAudio(bool isCorrect)
+    private void PlayAnsAudio(bool? isCorrect)
     {
         switch(isCorrect)
         {
@@ -56,6 +57,11 @@ public class SoundManager : MonoBehaviour
                 break;
         }
     }
+
+    /*public static void MasterVolumeSlider(float value)
+    {
+        AudioListener.volume = value;
+    }*/
 
     private void OnDisable()
     {

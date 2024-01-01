@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
@@ -8,17 +9,7 @@ public class Settings : MonoBehaviour
 
     public void ShowSettings()
     {
-        bool isActive = settings.activeInHierarchy;
-
-        switch (isActive)
-        {
-            case true:
-                settings.SetActive(!isActive);
-                break;
-            case false:
-                settings.SetActive(!isActive);
-                break;
-        }
+        settings.SetActive(!settings.activeInHierarchy);
     }
 
     /*public void DisplayVolumeValue()
@@ -55,28 +46,6 @@ public class Settings : MonoBehaviour
         if (BGMusicValue <= 0)
         {
             bgMusic.mute = true;
-        }
-    }
-
-    public void UISoundVolumeUp()
-    {
-        UISoundValue += increment;
-
-        if (UISoundValue >= 1)
-        {
-            UISoundValue = 1;
-        }
-    }
-
-    public void UISoundVolumeDown()
-    {
-        UISoundValue -= increment;
-
-        if (UISoundValue <= 0)
-        {
-            uiSounds[0].mute = true;
-            uiSounds[1].mute = true;
-            uiSounds[2].mute = true;
         }
     }*/
 }

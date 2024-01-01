@@ -11,14 +11,9 @@ public class StartScreenManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private GameObject levelScreen;
 
-    public void SaveData()
+    public void SaveData(int difficulty)
     {
-        EventManager.AddTester(nameText.text);
-    }
-
-    public void SetDifficulty(int difficulty)
-    {
-        EventManager.SetDifficulty(difficulty);
+        EventManager.AddTester(nameText.text, difficulty);
     }
 
     public void LoadLevelScreen()

@@ -9,8 +9,10 @@ public class TestTaker
     public int difficulty;
     public int score;
 
-    public TestTaker()
+    public TestTaker() { }
+
+    public TestTaker(string testerName = "Scholar")
     {
-        testerName = "Scholar";
+        this.testerName = testerName;
     }
 }

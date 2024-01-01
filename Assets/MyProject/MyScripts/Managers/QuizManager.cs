@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +15,8 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private GameObject quiz;
     [SerializeField] private GameObject endGameScreen;
     [SerializeField] private TextMeshProUGUI questionText;
+    [SerializeField] private float questionTime;
+    [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Button[] answerButtons;
 
@@ -20,17 +24,55 @@ public class QuizManager : MonoBehaviour
     QuizData _quizQuestions;
     private int score;
     private int _currentQuestionIndex;
-    private TesterDataManager testDataManager;
 
     private void Awake()
     {
-        _vetMedText = Resources.Load<TextAsset>("VetMedQuestions");
-        testDataManager = GetComponent<TesterDataManager>();
+        LoadQuizDifficulty();
     }
+
     // Start is called before the first frame update
     void Start()
     {
         ShowQuestions();
+    }
+
+    private void Update()
+    {
+        QuestionTimer();
+    }
+
+    private void LoadQuizDifficulty()
+    {
+        string filePath = Application.persistentDataPath + "/playerData.json";
+        
+
+        if (File.Exists(filePath))
+        {
+            try
+            {
+                string savedJsonData = File.ReadAllText(filePath);
+
+                if (!string.IsNullOrEmpty(savedJsonData))
+                {
+                    TestTaker tester = JsonUtility.FromJson<TestTaker>(savedJsonData);
+                    
+                    switch (tester.difficulty)
+                    {
+                        case 0:
+                            _vetMedText = Resources.Load<TextAsset>("VetMedQuestions");
+                            break;
+                        case 1:
+                            _vetMedText = Resources.Load<TextAsset>("VetMedQuestions_VetTech");
+                            break;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message + ", " + ex.StackTrace);
+            }
+        }
     }
 
     private void ShowQuestions()
@@ -98,6 +140,7 @@ public class QuizManager : MonoBehaviour
         bool isCorrect = answerIndex == currentQuestion.correctAnswerIndex;
         EventManager.CorrectAnswer(isCorrect);
 
+
         // Increment the current question index.
         _currentQuestionIndex++;
 
@@ -105,49 +148,81 @@ public class QuizManager : MonoBehaviour
         // show the next question.
         if (_currentQuestionIndex < _quizQuestions.questions.Count) ShowQuestions();
 
+        // If the current question index exeeds the total number of questions,
+        // show the end screen with the users name and score.
         else
         {
-            string filePath = Application.persistentDataPath + "/playerData.json";
+            SaveFinalScore();
+        }
+    }
 
-            //TestTaker loadedPlayerData;
+    private void ShowQuestionTime()
+    {
+        int seconds = Mathf.FloorToInt(questionTime % 60f);
 
-            if (File.Exists(filePath))
+        // Update the UI Text to display the remaining time
+        timerText.text = "00:" + seconds + "secs";
+    }
+
+    private void QuestionTimer()
+    {
+        if (questionTime > 0)
+        {
+            questionTime -= Time.deltaTime;
+
+            /*if (questionTime < 0)
+                questionTime = 0;*/
+
+            ShowQuestionTime();
+        }
+        else
+        {
+            SaveFinalScore();
+        }
+    }
+
+    private void SaveFinalScore()
+    {
+        string filePath = Application.persistentDataPath + "/playerData.json";
+
+        if (File.Exists(filePath))
+        {
+            try
             {
-                try
+                /*string savedJsonData = File.ReadAllText(filePath);
+
+                if (!string.IsNullOrEmpty(savedJsonData))
                 {
-                    string savedJsonData = File.ReadAllText(filePath);
+                    TestTaker tester = JsonUtility.FromJson<TestTaker>(savedJsonData);
 
-                    if (!string.IsNullOrEmpty(savedJsonData))
-                    {
-                        TestTaker tester = JsonUtility.FromJson<TestTaker>(savedJsonData);
+                    tester.score = this.score;
+                    EventManager.SaveData(tester);
 
-                        if (tester.testerName == "" || tester.testerName == null)
-                        {
-                            tester.testerName = "Scholar";
-                        }
+                    scoreText.text = $"{tester.testerName} earned a score of {score * 10}%!"; // score out of 10 questions * 10 gives percent.
 
-                        tester.score = this.score;
-                        EventManager.SaveData(tester);
+                    savedJsonData = File.ReadAllText(filePath);
+                    Debug.Log("Loaded: " + savedJsonData);
+                }*/
 
-                        scoreText.text = $"{tester.testerName} earned a score of {score * 10}%!"; // score out of 10 questions * 10 gives percent.
+                BinaryFormatter formatter = new BinaryFormatter();
+                FileStream fileStream = new FileStream(filePath, FileMode.Open);
 
-                        /*savedJsonData = File.ReadAllText(filePath);
-                        Debug.Log("Loaded: " + savedJsonData);*/
-                    }
+                List<TestTaker> testTakers = (List<TestTaker>)formatter.Deserialize(fileStream);
+                fileStream.Close();
 
-                }
-                catch (Exception ex)
-                {
-                    Debug.Log(ex.Message + ", " + ex.StackTrace);
-                }
 
             }
-            else
-                scoreText.text = $"Player earned a score of {score * 10}%!";
+            catch (Exception ex)
+            {
+                Debug.Log(ex.Message + ", " + ex.StackTrace);
+            }
 
-            // Show Final Score Screen and Corrections
-            endGameScreen.SetActive(true);
-            quiz.SetActive(false);
         }
+        else
+            scoreText.text = $"Player earned a score of {score * 10}%!";
+
+        // Show Final Score Screen and Corrections
+        endGameScreen.SetActive(true);
+        quiz.SetActive(false);
     }
 }
