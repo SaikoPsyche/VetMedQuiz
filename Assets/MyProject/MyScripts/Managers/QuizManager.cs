@@ -11,6 +11,11 @@
 //   * CheckAnswer        Changed. Added a bounds guard for a failed load.
 //   * CalculateScorePercent
 //                        Added. Replaces a hard coded "score * 10" percentage.
+//   * BuildQuizTimer     Added. Sets the clock from the sum of the drawn
+//                        questions' secondsToAnswer, plus a cushion, instead of
+//                        using one fixed time for every quiz.
+//   * ShowQuestionTime   Changed. Now renders minutes as well as seconds, which
+//                        it has to once a quiz can run past a minute.
 // ----------------------------------------------------------------------------
 
 using System;
@@ -30,6 +35,10 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private GameObject quiz;
     [SerializeField] private GameObject endGameScreen;
     [SerializeField] private TextMeshProUGUI questionText;
+
+    // Changed 2026-09-16 by Claude Code: BuildQuizTimer overwrites this at startup
+    // with the time the drawn questions are actually expected to need. The value
+    // set in the inspector is only used as a fallback if no questions load.
     [SerializeField] private float questionTime;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -39,7 +48,16 @@ public class QuizManager : MonoBehaviour
     // questions, the length is set here and the questions are drawn at random.
     [SerializeField] private int questionsPerQuiz = DefaultQuestionsPerQuiz;
 
+    // Added 2026-09-16 by Claude Code: slack added on top of the summed question
+    // times, to cover reading the screen and settling in at the start of a run.
+    [SerializeField] private float timeCushionSeconds = DefaultTimeCushionSeconds;
+
     private const int DefaultQuestionsPerQuiz = 10;
+    private const float DefaultTimeCushionSeconds = 15f;
+
+    // Used only if a question carries no secondsToAnswer, so an older or hand
+    // edited bank cannot leave the quiz with almost no time on the clock.
+    private const int FallbackSecondsPerQuestion = 20;
 
     private TextAsset _vetMedText;
 
@@ -53,8 +71,10 @@ public class QuizManager : MonoBehaviour
     {
         LoadQuizDifficulty();
 
-        // Added 2026-09-16 by Claude Code: draw the questions once, up front.
+        // Added 2026-09-16 by Claude Code: draw the questions once, up front,
+        // then size the clock to the questions that were actually drawn.
         BuildQuestionSet();
+        BuildQuizTimer();
     }
 
     // Start is called before the first frame update
@@ -142,6 +162,28 @@ public class QuizManager : MonoBehaviour
 
             _questions.Add(picked);
         }
+    }
+
+    // Added 2026-09-16 by Claude Code.
+    //
+    // The quiz clock is the sum of the drawn questions' own estimates plus a
+    // cushion, so a run of short recall questions gets less time than a run that
+    // happens to deal several dosage calculations.
+    private void BuildQuizTimer()
+    {
+        // Nothing was drawn, so leave the inspector value as the fallback.
+        if (_questions.Count == 0) return;
+
+        float total = 0f;
+
+        foreach (QuizQuestion question in _questions)
+        {
+            total += question.secondsToAnswer > 0
+                ? question.secondsToAnswer
+                : FallbackSecondsPerQuestion;
+        }
+
+        questionTime = total + timeCushionSeconds;
     }
 
     // Changed 2026-09-16 by Claude Code: this used to call JsonUtility.FromJson on
@@ -239,12 +281,17 @@ public class QuizManager : MonoBehaviour
         return Mathf.RoundToInt((float)score / totalQuestions * 100f);
     }
 
+    // Changed 2026-09-16 by Claude Code: this showed only "00:" plus the seconds
+    // within the current minute, so a quiz timed at 3m52s displayed "00:52secs".
+    // Quizzes now run past a minute, so the minutes have to be shown.
     private void ShowQuestionTime()
     {
-        int seconds = Mathf.FloorToInt(questionTime % 60f);
+        int remaining = Mathf.Max(0, Mathf.CeilToInt(questionTime));
+        int minutes = remaining / 60;
+        int seconds = remaining % 60;
 
         // Update the UI Text to display the remaining time
-        timerText.text = "00:" + seconds + "secs";
+        timerText.text = $"{minutes:00}:{seconds:00} secs";
     }
 
     private void QuestionTimer()

@@ -5932,6 +5932,7 @@ MonoBehaviour:
   - {fileID: 516301347}
   - {fileID: 393915238}
   questionsPerQuiz: 10
+  timeCushionSeconds: 15
 --- !u!114 &1579336738
 MonoBehaviour:
   m_ObjectHideFlags: 0

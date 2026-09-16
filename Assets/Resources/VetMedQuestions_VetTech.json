@@ -2,7 +2,8 @@
   "_comment": "JSON has no comment syntax, so this change history lives in a field instead. Unity's JsonUtility ignores fields that QuizData does not declare, so this is read by people only and can be deleted with no effect on the game.",
   "_changeHistory": [
     "2026-09-16 - Claude Code - Added 32 credentialed technician level questions after the original 10, covering dosage and fluid rate math, anesthesia monitoring and reversal agents, breathing circuits and oxygen supply, hematology and urinalysis interpretation, dentistry, radiographic exposure factors, CPR per RECOVER, toxicology and transfusion medicine. The original 10 questions were not modified.",
-    "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B."
+    "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B.",
+    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws and adds a 15s cushion to set the clock for the run."
   ],
   "questions": [
     {
@@ -13,7 +14,8 @@
         "C": "Hookworm",
         "D": "Giardia"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 25
     },
     {
       "question": "What is a purple top tube used for?",
@@ -23,7 +25,8 @@
         "C": "Collecting Whole Blood",
         "D": "It's a sterile tube that can be used for any type of sample."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 25
     },
     {
       "question": "What is the Distemper vaccine for?",
@@ -33,7 +36,8 @@
         "C": "To prevent certain species of ticks",
         "D": "The Distemper vaccine contains a combination of 4 to 5 vaccines that prevent different GI and Upper Respiratory diseases."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 30
     },
     {
       "question": "What is dermataphyte? WHat is the best way to test for it?",
@@ -43,7 +47,8 @@
         "C": "It is a protozoa that tested for by checking a fecal floation",
         "D": "It is a fungus thats tested for by checking a fecal smear."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 50
     },
     {
       "question": "What is the difference between a LIPOMA and PAPILLOMA?",
@@ -53,7 +58,8 @@
         "C": "A lipoma is benign fatty mass and a papilloma is benign wart.",
         "D": "A lipoma is a cancerous tumour and a papilloma is a benign tumour."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 40
     },
     {
       "question": "Which of the following species can contract Rabies?",
@@ -63,7 +69,8 @@
         "C": "Iguanas, Vipers, Axolotls, Salamanders, and Geckos.",
         "D": "Orangutans, Snails, Clams, Mussels, Octopi"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 30
     },
     {
       "question": "What position should a patient be in for a right lateral abdominal radiograph?",
@@ -73,7 +80,8 @@
         "C": "Laying on their sternum.",
         "D": "Laying with their right side down."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 25
     },
     {
       "question": "How do you test for ear mites?",
@@ -83,7 +91,8 @@
         "C": "Run a fecal flotation.",
         "D": "Run a 4DX."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 20
     },
     {
       "question": "What position should a patient be in for a OFA radiograph of the hips?",
@@ -93,7 +102,8 @@
         "C": "Dorsal recumbency",
         "D": "Cranial recumbency"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "Which of the following is NOT a way to test for fleas?",
@@ -103,7 +113,8 @@
         "C": "Use a flea comb to remove fleas from the fur.",
         "D": "Comb out a small amount of fur and use peroxide to check for flea dirt."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 40
     },
     {
       "question": "A 22 lb dog is prescribed cefazolin at 22 mg/kg. What is the total dose?",
@@ -113,7 +124,8 @@
         "C": "22 mg",
         "D": "484 mg"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 55
     },
     {
       "question": "A patient needs 75 mg of a drug that is supplied at 50 mg/mL. What volume do you draw up?",
@@ -123,7 +135,8 @@
         "C": "1.5 mL",
         "D": "0.67 mL"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 55
     },
     {
       "question": "A 20 kg dog is to receive maintenance fluids at 60 mL/kg/day. What is the hourly rate?",
@@ -133,7 +146,8 @@
         "C": "120 mL/hr",
         "D": "12 mL/hr"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 55
     },
     {
       "question": "You are running fluids at 50 mL/hr on a 15 drop/mL administration set. What is the drip rate?",
@@ -143,7 +157,8 @@
         "C": "50 drops per minute",
         "D": "About 12 to 13 drops per minute"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 60
     },
     {
       "question": "What is the shock dose of isotonic crystalloids for a dog, and how is it given?",
@@ -153,7 +168,8 @@
         "C": "80 to 90 mL/kg, given in smaller boluses of 1/4 to 1/3 of the dose with reassessment between each.",
         "D": "150 mL/kg pushed all at once."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 40
     },
     {
       "question": "Which of these anesthetic drugs provides NO analgesia?",
@@ -163,7 +179,8 @@
         "C": "Dexmedetomidine",
         "D": "Propofol"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 25
     },
     {
       "question": "Which drug reverses dexmedetomidine?",
@@ -173,7 +190,8 @@
         "C": "Naloxone",
         "D": "Atropine"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 15
     },
     {
       "question": "Naloxone is the reversal agent for which drug class?",
@@ -183,7 +201,8 @@
         "C": "Alpha-2 agonists",
         "D": "Dissociatives"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 15
     },
     {
       "question": "Your patient is on 3% isoflurane and becomes bradycardic and hypotensive. What is your first action?",
@@ -193,7 +212,8 @@
         "C": "Turn the vaporizer down and alert the veterinarian.",
         "D": "Redose the premedication."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 35
     },
     {
       "question": "What does capnography measure, and what is a normal range under anesthesia?",
@@ -203,7 +223,8 @@
         "C": "Respiratory rate, 8 to 20 breaths per minute",
         "D": "Oxygen saturation, 95 to 100%"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 25
     },
     {
       "question": "Your anesthetized patient's SpO2 reads 88%. What does that tell you?",
@@ -213,7 +234,8 @@
         "C": "This is normal and needs no action.",
         "D": "The patient is hypotensive."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 35
     },
     {
       "question": "What is the minimum acceptable mean arterial pressure (MAP) for an anesthetized patient?",
@@ -223,7 +245,8 @@
         "C": "120 mmHg",
         "D": "60 mmHg"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "A non-rebreathing circuit is generally chosen for patients under what body weight?",
@@ -233,7 +256,8 @@
         "C": "Under about 7 kg (15 lbs)",
         "D": "Body weight does not matter when choosing a circuit."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 25
     },
     {
       "question": "What is the purpose of the pop-off (adjustable pressure limiting) valve?",
@@ -243,7 +267,8 @@
         "C": "It delivers anesthetic gas to the patient.",
         "D": "It absorbs carbon dioxide from exhaled gas."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 30
     },
     {
       "question": "The granules in the CO2 absorbent canister have changed color and feel hard and crumbly. What does that mean?",
@@ -253,7 +278,8 @@
         "C": "The vaporizer needs to be refilled.",
         "D": "The oxygen tank is empty."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 40
     },
     {
       "question": "An E cylinder of oxygen reads 500 psi. About how many liters are left?",
@@ -263,7 +289,8 @@
         "C": "About 50 L",
         "D": "About 150 L"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 55
     },
     {
       "question": "What is in a green top tube and what does it give you?",
@@ -273,7 +300,8 @@
         "C": "Lithium heparin, which gives plasma for chemistry.",
         "D": "Sodium citrate, which gives plasma for coagulation testing."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 25
     },
     {
       "question": "What is a blue top (sodium citrate) tube used for?",
@@ -283,7 +311,8 @@
         "C": "A serum chemistry panel.",
         "D": "Coagulation testing such as PT and aPTT."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "What happens to your results if an EDTA tube is significantly underfilled?",
@@ -293,7 +322,8 @@
         "C": "Nothing, fill volume does not matter in a CBC tube.",
         "D": "The sample will read as hemolyzed every time."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 40
     },
     {
       "question": "Which part of a blood smear do you use to perform the differential and evaluate cell morphology?",
@@ -303,7 +333,8 @@
         "C": "The thick body of the smear",
         "D": "Any area, as long as the stain looks good"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 25
     },
     {
       "question": "After spinning a microhematocrit tube, what is the buffy coat made of?",
@@ -313,7 +344,8 @@
         "C": "White blood cells and platelets",
         "D": "Red blood cells"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "What does a refractometer measure in the lab?",
@@ -323,7 +355,8 @@
         "C": "Packed cell volume.",
         "D": "Urine specific gravity and total solids/protein."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "A dehydrated, azotemic cat has a urine specific gravity of 1.010. What does that indicate?",
@@ -333,7 +366,8 @@
         "C": "The sample was contaminated and should be ignored.",
         "D": "Diabetes mellitus."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 35
     },
     {
       "question": "Which parasite is best detected with a zinc sulfate flotation rather than a standard sugar or salt solution?",
@@ -343,7 +377,8 @@
         "C": "Hookworms",
         "D": "Whipworms"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     },
     {
       "question": "You see 'coffin lid' shaped crystals in a urine sediment. What are they?",
@@ -353,7 +388,8 @@
         "C": "Calcium oxalate dihydrate",
         "D": "Struvite (magnesium ammonium phosphate)"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "How should an ultrasonic scaler tip be used during a dental prophylaxis?",
@@ -363,7 +399,8 @@
         "C": "Pressed point first into the gingival sulcus.",
         "D": "Used dry so you can see the calculus better."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 45
     },
     {
       "question": "What is a normal periodontal probing depth in a dog?",
@@ -373,7 +410,8 @@
         "C": "Probing depth has no clinical meaning.",
         "D": "4 to 6 mm"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     },
     {
       "question": "Using the modified Triadan system, which tooth is 104?",
@@ -383,7 +421,8 @@
         "C": "The right maxillary canine",
         "D": "The right maxillary first premolar"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 30
     },
     {
       "question": "On a radiograph, what does increasing the kVp primarily change?",
@@ -393,7 +432,8 @@
         "C": "Only the number of x-ray photons produced.",
         "D": "The focal film distance."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 35
     },
     {
       "question": "Per RECOVER guidelines, what is the correct chest compression rate and depth for CPR in a dog?",
@@ -403,7 +443,8 @@
         "C": "40 per minute, alternating with 5 breaths.",
         "D": "60 to 80 per minute, compressing 1/4 of the chest."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 30
     },
     {
       "question": "A cat is presented after chewing on an Easter lily. What is the primary concern?",
@@ -413,7 +454,8 @@
         "C": "Nothing, lilies are only toxic to dogs",
         "D": "Acute kidney injury"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 25
     },
     {
       "question": "Why must cats be blood typed before their FIRST transfusion, even though dogs usually are not?",
@@ -423,7 +465,8 @@
         "C": "Cats have naturally occurring alloantibodies, so a type mismatch can cause a fatal reaction on the first transfusion.",
         "D": "Cats cannot receive transfusions at all."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 45
     }
   ]
 }

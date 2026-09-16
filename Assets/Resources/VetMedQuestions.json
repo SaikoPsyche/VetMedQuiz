@@ -2,7 +2,8 @@
   "_comment": "JSON has no comment syntax, so this change history lives in a field instead. Unity's JsonUtility ignores fields that QuizData does not declare, so this is read by people only and can be deleted with no effect on the game.",
   "_changeHistory": [
     "2026-09-16 - Claude Code - Added 32 student level questions after the original 10, covering clinical abbreviations, normal vitals, directional anatomy, zoonoses, parasite transmission, restraint, radiation safety, sharps handling and clinic protocol. The original 10 questions were not modified.",
-    "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B."
+    "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B.",
+    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws and adds a 15s cushion to set the clock for the run."
   ],
   "questions": [
     {
@@ -13,7 +14,8 @@
         "C": "Rabies and FVRCP",
         "D": "Rabies and Influenza"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "What parts of a patient's body should be restrained for a lateral exam?",
@@ -23,7 +25,8 @@
         "C": "Cute little Nose and Toes",
         "D": "Head and Front Paws"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 20
     },
     {
       "question": "What are the core vaccines for a canine patient?",
@@ -33,7 +36,8 @@
         "C": "LPV, Lyme, Rabies",
         "D": "Rabies, CPV, Bordetella"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     },
     {
       "question": "What is 'FeLV'?",
@@ -43,7 +47,8 @@
         "C": "Fetal Lorax Virus",
         "D": "Feline Leukemia Virus"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 15
     },
     {
       "question": "What is 'FIV'?",
@@ -53,7 +58,8 @@
         "C": "Form Insulin Vaccine",
         "D": "Frightening Individual Vermin"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 15
     },
     {
       "question": "A 4DX tests for the following:",
@@ -63,7 +69,8 @@
         "C": "Heartworm, Lyme Disease, Ehrlicia and Anaplasma",
         "D": "Rabies, Parvo, Kennel Cough and Cushings Disease"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "The client is the pet.",
@@ -71,7 +78,8 @@
         "A": "True",
         "B": "False"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 15
     },
     {
       "question": "Exam rooms should be spot cleaned between each appointment.",
@@ -79,7 +87,8 @@
         "A": "True",
         "B": "False"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 15
     },
     {
       "question": "What is a tiger top tube used for?",
@@ -89,7 +98,8 @@
         "C": "Shooting darts at fractious cats.",
         "D": "Distributing precise amounts of blood."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 25
     },
     {
       "question": "A client with no money is not a client at all.",
@@ -98,7 +108,8 @@
         "B": "False",
         "C": "It depends on the severity of the patient’s health"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 30
     },
     {
       "question": "What does 'NPO' mean on a patient's treatment sheet?",
@@ -108,7 +119,8 @@
         "C": "Needs post-op care.",
         "D": "Nothing by mouth."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "What is the normal resting heart rate range for an adult dog?",
@@ -118,7 +130,8 @@
         "C": "60 to 140 beats per minute",
         "D": "10 to 30 beats per minute"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 25
     },
     {
       "question": "What is the normal rectal temperature range for a healthy dog or cat?",
@@ -128,7 +141,8 @@
         "C": "95.0 to 98.6 F",
         "D": "106.0 to 108.0 F"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     },
     {
       "question": "Where do you find a femoral pulse?",
@@ -138,7 +152,8 @@
         "C": "On the bottom of the back paw.",
         "D": "At the base of the tail."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 25
     },
     {
       "question": "What does 'BID' mean on a prescription label?",
@@ -148,7 +163,8 @@
         "C": "Once daily",
         "D": "Three times daily"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 15
     },
     {
       "question": "A medication is prescribed 'q8h'. How often is it given?",
@@ -158,7 +174,8 @@
         "C": "Every 8 hours",
         "D": "Once, on day 8"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "Where is an injection given if the order says 'SQ'?",
@@ -168,7 +185,8 @@
         "C": "Into a muscle",
         "D": "Under the skin"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "Which vein is most commonly used to place a peripheral IV catheter in a dog?",
@@ -178,7 +196,8 @@
         "C": "Jugular",
         "D": "Femoral"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 20
     },
     {
       "question": "Which term means surgical removal of the ovaries and uterus?",
@@ -188,7 +207,8 @@
         "C": "Orchiectomy",
         "D": "Gastropexy"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 15
     },
     {
       "question": "What is the medical term for neutering a male dog?",
@@ -198,7 +218,8 @@
         "C": "Vasectomy",
         "D": "Castration, also called an orchiectomy."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 15
     },
     {
       "question": "In anatomical terms, 'cranial' means:",
@@ -208,7 +229,8 @@
         "C": "Toward the head",
         "D": "Toward the belly"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 15
     },
     {
       "question": "In anatomical terms, 'ventral' refers to:",
@@ -218,7 +240,8 @@
         "C": "The topline or back",
         "D": "The head"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 20
     },
     {
       "question": "Which species is an obligate carnivore that must get taurine from its diet?",
@@ -228,7 +251,8 @@
         "C": "Cat",
         "D": "Guinea pig"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 15
     },
     {
       "question": "What does 'zoonotic' mean?",
@@ -238,7 +262,8 @@
         "C": "A disease only animals can catch.",
         "D": "A disease that is always caused by a parasite."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 25
     },
     {
       "question": "Which of the following is a zoonotic disease?",
@@ -248,7 +273,8 @@
         "C": "Canine Distemper",
         "D": "Feline Leukemia Virus"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 25
     },
     {
       "question": "'Kennel cough' is also known as:",
@@ -258,7 +284,8 @@
         "C": "Feline upper respiratory complex",
         "D": "Infectious tracheobronchitis"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 15
     },
     {
       "question": "Which vaccine is required by law for dogs and cats in most states?",
@@ -268,7 +295,8 @@
         "C": "Rabies",
         "D": "Lyme"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 15
     },
     {
       "question": "A patient in 'sternal recumbency' is:",
@@ -278,7 +306,8 @@
         "C": "Standing squarely on all four legs.",
         "D": "Laying on their back."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     },
     {
       "question": "What PPE should you be wearing when you are holding for radiographs?",
@@ -288,7 +317,8 @@
         "C": "Exam gloves only.",
         "D": "Nothing, as long as the exposure is quick."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 25
     },
     {
       "question": "Where do used needles and scalpel blades go?",
@@ -298,7 +328,8 @@
         "C": "A red biohazard bag",
         "D": "A puncture resistant sharps container"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 20
     },
     {
       "question": "Why is a patient fasted before a scheduled surgery?",
@@ -308,7 +339,8 @@
         "C": "Fasting is a tradition and has no medical purpose.",
         "D": "To lower their body temperature before induction."
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 40
     },
     {
       "question": "How should a cat be restrained for a cephalic venipuncture?",
@@ -318,7 +350,8 @@
         "C": "Scruff the cat and lift it off of the table.",
         "D": "Hold the head and extend the front leg forward over the table edge while occluding the vein at the elbow."
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 45
     },
     {
       "question": "What is 'flea dirt'?",
@@ -328,7 +361,8 @@
         "C": "Dried flea feces, which is made of digested blood.",
         "D": "Flea eggs."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "How is heartworm disease transmitted?",
@@ -338,7 +372,8 @@
         "C": "By drinking contaminated water",
         "D": "By fleas"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 15
     },
     {
       "question": "How do dogs and cats most commonly get tapeworms?",
@@ -348,7 +383,8 @@
         "C": "By drinking pond water.",
         "D": "From a mosquito bite."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 20
     },
     {
       "question": "What is it called when urine is collected with a needle directly from the bladder?",
@@ -358,7 +394,8 @@
         "C": "Cystocentesis",
         "D": "Urinary catheterization"
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 20
     },
     {
       "question": "Which abbreviation means 'left eye'?",
@@ -368,7 +405,8 @@
         "C": "OU",
         "D": "OS"
       },
-      "correctAnswerIndex": "3"
+      "correctAnswerIndex": "3",
+      "secondsToAnswer": 15
     },
     {
       "question": "A medication is to be given 'AU'. Where does it go?",
@@ -378,7 +416,8 @@
         "C": "In the left ear only",
         "D": "In both eyes"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     },
     {
       "question": "Which is an appropriate way to warm a hypothermic post-op patient?",
@@ -388,7 +427,8 @@
         "C": "A hair dryer held close to the patient's fur.",
         "D": "An electric heating pad set to high, placed under the patient."
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 40
     },
     {
       "question": "What does the 'contact time' on a disinfectant label tell you?",
@@ -398,7 +438,8 @@
         "C": "How long the surface must stay visibly wet with the product for it to kill pathogens.",
         "D": "How long the bottle is good for after it is opened."
       },
-      "correctAnswerIndex": "2"
+      "correctAnswerIndex": "2",
+      "secondsToAnswer": 45
     },
     {
       "question": "It is appropriate to give a client a diagnosis and recommend a prescription over the phone when the doctor is busy.",
@@ -406,7 +447,8 @@
         "A": "True",
         "B": "False"
       },
-      "correctAnswerIndex": "1"
+      "correctAnswerIndex": "1",
+      "secondsToAnswer": 30
     },
     {
       "question": "Every patient should be positively identified against their cage card and chart before any treatment is given.",
@@ -414,7 +456,8 @@
         "A": "True",
         "B": "False"
       },
-      "correctAnswerIndex": "0"
+      "correctAnswerIndex": "0",
+      "secondsToAnswer": 20
     }
   ]
 }
