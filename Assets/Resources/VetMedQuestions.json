@@ -1,4 +1,9 @@
 {
+  "_comment": "JSON has no comment syntax, so this change history lives in a field instead. Unity's JsonUtility ignores fields that QuizData does not declare, so this is read by people only and can be deleted with no effect on the game.",
+  "_changeHistory": [
+    "2026-09-16 - Claude Code - Added 32 student level questions after the original 10, covering clinical abbreviations, normal vitals, directional anatomy, zoonoses, parasite transmission, restraint, radiation safety, sharps handling and clinic protocol. The original 10 questions were not modified.",
+    "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B."
+  ],
   "questions": [
     {
       "question": "What are the core vaccines for a feline patient?",

@@ -1,3 +1,18 @@
+// ----------------------------------------------------------------------------
+// Change history
+//
+// 2026-09-16 - Claude Code
+//   * questionsPerQuiz   Added. Serialized quiz length (default 10) replacing a
+//                        hard coded question count. Clamped to the bank size.
+//   * BuildQuestionSet   Added. Draws this run's questions at random from the
+//                        full bank and is called once, from Awake.
+//   * ShowQuestions      Changed. No longer re-parses the JSON asset on every
+//                        question; it only displays the question already drawn.
+//   * CheckAnswer        Changed. Added a bounds guard for a failed load.
+//   * CalculateScorePercent
+//                        Added. Replaces a hard coded "score * 10" percentage.
+// ----------------------------------------------------------------------------
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,11 +34,17 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Button[] answerButtons;
+    // Added 2026-09-16 by Claude Code: the quiz length used to be implied by the
+    // size of the JSON file. Now that the banks hold more than one quiz worth of
+    // questions, the length is set here and the questions are drawn at random.
     [SerializeField] private int questionsPerQuiz = DefaultQuestionsPerQuiz;
 
     private const int DefaultQuestionsPerQuiz = 10;
 
     private TextAsset _vetMedText;
+
+    // Changed 2026-09-16 by Claude Code: was a QuizData holding the entire bank.
+    // This is now only the questions drawn for this run.
     private List<QuizQuestion> _questions = new List<QuizQuestion>();
     private int score;
     private int _currentQuestionIndex;
@@ -31,6 +52,8 @@ public class QuizManager : MonoBehaviour
     private void Awake()
     {
         LoadQuizDifficulty();
+
+        // Added 2026-09-16 by Claude Code: draw the questions once, up front.
         BuildQuestionSet();
     }
 
@@ -79,6 +102,8 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    // Added 2026-09-16 by Claude Code.
+    //
     // Draws this run's questions from the full bank. Called once, in Awake, so the
     // selection stays fixed for the rest of the quiz. Restarting reloads the scene,
     // which runs this again and deals a new set.
@@ -119,6 +144,10 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    // Changed 2026-09-16 by Claude Code: this used to call JsonUtility.FromJson on
+    // every question, which re-read the whole asset each time and would have
+    // re-rolled the random draw between questions. Loading and drawing now happen
+    // once in BuildQuestionSet, and this only displays what was already drawn.
     private void ShowQuestions()
     {
         if (_currentQuestionIndex >= _questions.Count) return;
@@ -167,6 +196,8 @@ public class QuizManager : MonoBehaviour
     public void CheckAnswer(int answerIndex)
     {
         // Find the cureent question
+        // Guard added 2026-09-16 by Claude Code: without it, clicking an answer
+        // after a failed load threw a NullReferenceException.
         if (_currentQuestionIndex >= _questions.Count) return;
 
         var currentQuestion = _questions[_currentQuestionIndex];
@@ -195,6 +226,8 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    // Added 2026-09-16 by Claude Code, replacing "score * 10" in SaveFinalScore.
+    //
     // Percent is derived from the number of questions actually asked, so the
     // question banks can grow without the final score going over 100%.
     private int CalculateScorePercent()
@@ -269,6 +302,8 @@ public class QuizManager : MonoBehaviour
 
         }
         else
+            // Changed 2026-09-16 by Claude Code: was "score * 10", which was only
+            // correct while every quiz was exactly 10 questions long.
             scoreText.text = $"Player earned a score of {CalculateScorePercent()}%!";
 
         // Show Final Score Screen and Corrections
