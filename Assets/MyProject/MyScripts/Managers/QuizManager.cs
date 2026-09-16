@@ -156,6 +156,17 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    // Percent is derived from the number of questions actually loaded, so the
+    // question banks can grow without the final score going over 100%.
+    private int CalculateScorePercent()
+    {
+        int totalQuestions = _quizQuestions?.questions?.Count ?? 0;
+
+        if (totalQuestions <= 0) return 0;
+
+        return Mathf.RoundToInt((float)score / totalQuestions * 100f);
+    }
+
     private void ShowQuestionTime()
     {
         int seconds = Mathf.FloorToInt(questionTime % 60f);
@@ -219,7 +230,7 @@ public class QuizManager : MonoBehaviour
 
         }
         else
-            scoreText.text = $"Player earned a score of {score * 10}%!";
+            scoreText.text = $"Player earned a score of {CalculateScorePercent()}%!";
 
         // Show Final Score Screen and Corrections
         endGameScreen.SetActive(true);

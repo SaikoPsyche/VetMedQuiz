@@ -99,6 +99,326 @@
         "D": "Comb out a small amount of fur and use peroxide to check for flea dirt."
       },
       "correctAnswerIndex": "0"
+    },
+    {
+      "question": "A 22 lb dog is prescribed cefazolin at 22 mg/kg. What is the total dose?",
+      "answers": {
+        "A": "220 mg",
+        "B": "110 mg",
+        "C": "22 mg",
+        "D": "484 mg"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "A patient needs 75 mg of a drug that is supplied at 50 mg/mL. What volume do you draw up?",
+      "answers": {
+        "A": "3.75 mL",
+        "B": "0.75 mL",
+        "C": "1.5 mL",
+        "D": "0.67 mL"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "A 20 kg dog is to receive maintenance fluids at 60 mL/kg/day. What is the hourly rate?",
+      "answers": {
+        "A": "25 mL/hr",
+        "B": "50 mL/hr",
+        "C": "120 mL/hr",
+        "D": "12 mL/hr"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "You are running fluids at 50 mL/hr on a 15 drop/mL administration set. What is the drip rate?",
+      "answers": {
+        "A": "25 drops per minute",
+        "B": "6 drops per minute",
+        "C": "50 drops per minute",
+        "D": "About 12 to 13 drops per minute"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What is the shock dose of isotonic crystalloids for a dog, and how is it given?",
+      "answers": {
+        "A": "5 mL/kg given subcutaneously.",
+        "B": "10 to 15 mL/kg as a slow drip over an hour.",
+        "C": "80 to 90 mL/kg, given in smaller boluses of 1/4 to 1/3 of the dose with reassessment between each.",
+        "D": "150 mL/kg pushed all at once."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "Which of these anesthetic drugs provides NO analgesia?",
+      "answers": {
+        "A": "Hydromorphone",
+        "B": "Ketamine",
+        "C": "Dexmedetomidine",
+        "D": "Propofol"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "Which drug reverses dexmedetomidine?",
+      "answers": {
+        "A": "Atipamezole",
+        "B": "Flumazenil",
+        "C": "Naloxone",
+        "D": "Atropine"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "Naloxone is the reversal agent for which drug class?",
+      "answers": {
+        "A": "Benzodiazepines",
+        "B": "Opioids",
+        "C": "Alpha-2 agonists",
+        "D": "Dissociatives"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Your patient is on 3% isoflurane and becomes bradycardic and hypotensive. What is your first action?",
+      "answers": {
+        "A": "Turn the vaporizer up to deepen the plane.",
+        "B": "Disconnect the patient from oxygen.",
+        "C": "Turn the vaporizer down and alert the veterinarian.",
+        "D": "Redose the premedication."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What does capnography measure, and what is a normal range under anesthesia?",
+      "answers": {
+        "A": "Systolic blood pressure, 80 to 120 mmHg",
+        "B": "End tidal carbon dioxide, 35 to 45 mmHg",
+        "C": "Respiratory rate, 8 to 20 breaths per minute",
+        "D": "Oxygen saturation, 95 to 100%"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Your anesthetized patient's SpO2 reads 88%. What does that tell you?",
+      "answers": {
+        "A": "The patient is hypoxemic and needs intervention now.",
+        "B": "The patient is hypercapnic.",
+        "C": "This is normal and needs no action.",
+        "D": "The patient is hypotensive."
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "What is the minimum acceptable mean arterial pressure (MAP) for an anesthetized patient?",
+      "answers": {
+        "A": "40 mmHg",
+        "B": "90 mmHg",
+        "C": "120 mmHg",
+        "D": "60 mmHg"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "A non-rebreathing circuit is generally chosen for patients under what body weight?",
+      "answers": {
+        "A": "Under about 25 kg (55 lbs)",
+        "B": "Over about 30 kg (65 lbs)",
+        "C": "Under about 7 kg (15 lbs)",
+        "D": "Body weight does not matter when choosing a circuit."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What is the purpose of the pop-off (adjustable pressure limiting) valve?",
+      "answers": {
+        "A": "It vents excess gas from the breathing circuit so pressure cannot build up.",
+        "B": "It measures the patient's tidal volume.",
+        "C": "It delivers anesthetic gas to the patient.",
+        "D": "It absorbs carbon dioxide from exhaled gas."
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "The granules in the CO2 absorbent canister have changed color and feel hard and crumbly. What does that mean?",
+      "answers": {
+        "A": "The scavenge system is full.",
+        "B": "The absorbent is exhausted, can no longer remove CO2, and must be replaced.",
+        "C": "The vaporizer needs to be refilled.",
+        "D": "The oxygen tank is empty."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "An E cylinder of oxygen reads 500 psi. About how many liters are left?",
+      "answers": {
+        "A": "About 1,500 L",
+        "B": "About 500 L",
+        "C": "About 50 L",
+        "D": "About 150 L"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What is in a green top tube and what does it give you?",
+      "answers": {
+        "A": "A clot activator, which gives serum.",
+        "B": "EDTA, which gives whole blood for a CBC.",
+        "C": "Lithium heparin, which gives plasma for chemistry.",
+        "D": "Sodium citrate, which gives plasma for coagulation testing."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What is a blue top (sodium citrate) tube used for?",
+      "answers": {
+        "A": "A complete blood count.",
+        "B": "Blood typing only.",
+        "C": "A serum chemistry panel.",
+        "D": "Coagulation testing such as PT and aPTT."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What happens to your results if an EDTA tube is significantly underfilled?",
+      "answers": {
+        "A": "The excess anticoagulant shrinks the red cells, falsely lowering the PCV and red cell indices.",
+        "B": "The total protein is falsely increased.",
+        "C": "Nothing, fill volume does not matter in a CBC tube.",
+        "D": "The sample will read as hemolyzed every time."
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "Which part of a blood smear do you use to perform the differential and evaluate cell morphology?",
+      "answers": {
+        "A": "The feathered edge",
+        "B": "The monolayer, just behind the feathered edge",
+        "C": "The thick body of the smear",
+        "D": "Any area, as long as the stain looks good"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "After spinning a microhematocrit tube, what is the buffy coat made of?",
+      "answers": {
+        "A": "Fibrin strands",
+        "B": "Plasma proteins",
+        "C": "White blood cells and platelets",
+        "D": "Red blood cells"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What does a refractometer measure in the lab?",
+      "answers": {
+        "A": "Blood pressure.",
+        "B": "Blood glucose.",
+        "C": "Packed cell volume.",
+        "D": "Urine specific gravity and total solids/protein."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "A dehydrated, azotemic cat has a urine specific gravity of 1.010. What does that indicate?",
+      "answers": {
+        "A": "Normal urine concentrating ability.",
+        "B": "Isosthenuria, meaning the kidneys are not concentrating urine, which is consistent with renal disease.",
+        "C": "The sample was contaminated and should be ignored.",
+        "D": "Diabetes mellitus."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Which parasite is best detected with a zinc sulfate flotation rather than a standard sugar or salt solution?",
+      "answers": {
+        "A": "Giardia",
+        "B": "Roundworms",
+        "C": "Hookworms",
+        "D": "Whipworms"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "You see 'coffin lid' shaped crystals in a urine sediment. What are they?",
+      "answers": {
+        "A": "Ammonium biurate",
+        "B": "Bilirubin",
+        "C": "Calcium oxalate dihydrate",
+        "D": "Struvite (magnesium ammonium phosphate)"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "How should an ultrasonic scaler tip be used during a dental prophylaxis?",
+      "answers": {
+        "A": "Held against one tooth surface for 30 seconds or more to be thorough.",
+        "B": "Kept moving, using the side of the tip with water flowing, for only a few seconds per tooth.",
+        "C": "Pressed point first into the gingival sulcus.",
+        "D": "Used dry so you can see the calculus better."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What is a normal periodontal probing depth in a dog?",
+      "answers": {
+        "A": "0 to 3 mm",
+        "B": "7 to 10 mm",
+        "C": "Probing depth has no clinical meaning.",
+        "D": "4 to 6 mm"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "Using the modified Triadan system, which tooth is 104?",
+      "answers": {
+        "A": "The right mandibular canine",
+        "B": "The left maxillary canine",
+        "C": "The right maxillary canine",
+        "D": "The right maxillary first premolar"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "On a radiograph, what does increasing the kVp primarily change?",
+      "answers": {
+        "A": "The energy and penetrating power of the beam, which changes the scale of contrast.",
+        "B": "Nothing, kVp only matters on digital systems.",
+        "C": "Only the number of x-ray photons produced.",
+        "D": "The focal film distance."
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "Per RECOVER guidelines, what is the correct chest compression rate and depth for CPR in a dog?",
+      "answers": {
+        "A": "150 per minute, as deep as you can go.",
+        "B": "100 to 120 per minute, compressing 1/3 to 1/2 of the chest width.",
+        "C": "40 per minute, alternating with 5 breaths.",
+        "D": "60 to 80 per minute, compressing 1/4 of the chest."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "A cat is presented after chewing on an Easter lily. What is the primary concern?",
+      "answers": {
+        "A": "Acute liver failure",
+        "B": "Immune mediated hemolytic anemia",
+        "C": "Nothing, lilies are only toxic to dogs",
+        "D": "Acute kidney injury"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "Why must cats be blood typed before their FIRST transfusion, even though dogs usually are not?",
+      "answers": {
+        "A": "Typing is done to determine the volume of blood to give.",
+        "B": "Cats only have one blood type, so typing is a formality.",
+        "C": "Cats have naturally occurring alloantibodies, so a type mismatch can cause a fatal reaction on the first transfusion.",
+        "D": "Cats cannot receive transfusions at all."
+      },
+      "correctAnswerIndex": "2"
     }
   ]
 }

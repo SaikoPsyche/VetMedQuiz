@@ -94,6 +94,322 @@
         "C": "It depends on the severity of the patient’s health"
       },
       "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What does 'NPO' mean on a patient's treatment sheet?",
+      "answers": {
+        "A": "No pain observed.",
+        "B": "Normal pulse and oxygen.",
+        "C": "Needs post-op care.",
+        "D": "Nothing by mouth."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What is the normal resting heart rate range for an adult dog?",
+      "answers": {
+        "A": "200 to 260 beats per minute",
+        "B": "140 to 220 beats per minute",
+        "C": "60 to 140 beats per minute",
+        "D": "10 to 30 beats per minute"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What is the normal rectal temperature range for a healthy dog or cat?",
+      "answers": {
+        "A": "100.0 to 102.5 F",
+        "B": "103.5 to 105.0 F",
+        "C": "95.0 to 98.6 F",
+        "D": "106.0 to 108.0 F"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "Where do you find a femoral pulse?",
+      "answers": {
+        "A": "Along the underside of the neck.",
+        "B": "On the inner thigh, near the groin.",
+        "C": "On the bottom of the back paw.",
+        "D": "At the base of the tail."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What does 'BID' mean on a prescription label?",
+      "answers": {
+        "A": "Twice daily",
+        "B": "Every other day",
+        "C": "Once daily",
+        "D": "Three times daily"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "A medication is prescribed 'q8h'. How often is it given?",
+      "answers": {
+        "A": "For a total of 8 doses",
+        "B": "Eight times a day",
+        "C": "Every 8 hours",
+        "D": "Once, on day 8"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "Where is an injection given if the order says 'SQ'?",
+      "answers": {
+        "A": "By mouth",
+        "B": "Into a vein",
+        "C": "Into a muscle",
+        "D": "Under the skin"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "Which vein is most commonly used to place a peripheral IV catheter in a dog?",
+      "answers": {
+        "A": "Coccygeal",
+        "B": "Cephalic",
+        "C": "Jugular",
+        "D": "Femoral"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Which term means surgical removal of the ovaries and uterus?",
+      "answers": {
+        "A": "Ovariohysterectomy",
+        "B": "Cystotomy",
+        "C": "Orchiectomy",
+        "D": "Gastropexy"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "What is the medical term for neutering a male dog?",
+      "answers": {
+        "A": "Ovariectomy",
+        "B": "Cryptorchidism",
+        "C": "Vasectomy",
+        "D": "Castration, also called an orchiectomy."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "In anatomical terms, 'cranial' means:",
+      "answers": {
+        "A": "Toward the tail",
+        "B": "Toward the spine",
+        "C": "Toward the head",
+        "D": "Toward the belly"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "In anatomical terms, 'ventral' refers to:",
+      "answers": {
+        "A": "The outside of a limb",
+        "B": "The belly side",
+        "C": "The topline or back",
+        "D": "The head"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Which species is an obligate carnivore that must get taurine from its diet?",
+      "answers": {
+        "A": "Rabbit",
+        "B": "Dog",
+        "C": "Cat",
+        "D": "Guinea pig"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "What does 'zoonotic' mean?",
+      "answers": {
+        "A": "A disease that is only found at zoos.",
+        "B": "A disease that can spread between animals and people.",
+        "C": "A disease only animals can catch.",
+        "D": "A disease that is always caused by a parasite."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Which of the following is a zoonotic disease?",
+      "answers": {
+        "A": "Rabies",
+        "B": "Canine Parvovirus",
+        "C": "Canine Distemper",
+        "D": "Feline Leukemia Virus"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "'Kennel cough' is also known as:",
+      "answers": {
+        "A": "Reverse sneezing",
+        "B": "Laryngeal paralysis",
+        "C": "Feline upper respiratory complex",
+        "D": "Infectious tracheobronchitis"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "Which vaccine is required by law for dogs and cats in most states?",
+      "answers": {
+        "A": "Bordetella",
+        "B": "Leptospirosis",
+        "C": "Rabies",
+        "D": "Lyme"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "A patient in 'sternal recumbency' is:",
+      "answers": {
+        "A": "Laying on their chest, upright on their sternum.",
+        "B": "Laying on their right side.",
+        "C": "Standing squarely on all four legs.",
+        "D": "Laying on their back."
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "What PPE should you be wearing when you are holding for radiographs?",
+      "answers": {
+        "A": "A surgical mask and safety glasses.",
+        "B": "Lead gown, thyroid shield, lead gloves, and your dosimetry badge.",
+        "C": "Exam gloves only.",
+        "D": "Nothing, as long as the exposure is quick."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Where do used needles and scalpel blades go?",
+      "answers": {
+        "A": "The recycling bin",
+        "B": "The regular trash",
+        "C": "A red biohazard bag",
+        "D": "A puncture resistant sharps container"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "Why is a patient fasted before a scheduled surgery?",
+      "answers": {
+        "A": "To lower the risk of vomiting and aspiration under anesthesia.",
+        "B": "To make them hungry enough to eat during recovery.",
+        "C": "Fasting is a tradition and has no medical purpose.",
+        "D": "To lower their body temperature before induction."
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "How should a cat be restrained for a cephalic venipuncture?",
+      "answers": {
+        "A": "Hold only the back legs and let the front end go.",
+        "B": "Burrito the cat in a towel with all four legs tucked inside.",
+        "C": "Scruff the cat and lift it off of the table.",
+        "D": "Hold the head and extend the front leg forward over the table edge while occluding the vein at the elbow."
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "What is 'flea dirt'?",
+      "answers": {
+        "A": "Dead skin cells shed by an itchy patient.",
+        "B": "The soil that fleas live in.",
+        "C": "Dried flea feces, which is made of digested blood.",
+        "D": "Flea eggs."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "How is heartworm disease transmitted?",
+      "answers": {
+        "A": "By ticks",
+        "B": "By mosquitoes",
+        "C": "By drinking contaminated water",
+        "D": "By fleas"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "How do dogs and cats most commonly get tapeworms?",
+      "answers": {
+        "A": "From contact with another dog's saliva.",
+        "B": "By swallowing an infected flea.",
+        "C": "By drinking pond water.",
+        "D": "From a mosquito bite."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What is it called when urine is collected with a needle directly from the bladder?",
+      "answers": {
+        "A": "Manual expression",
+        "B": "Free catch",
+        "C": "Cystocentesis",
+        "D": "Urinary catheterization"
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "Which abbreviation means 'left eye'?",
+      "answers": {
+        "A": "OD",
+        "B": "AS",
+        "C": "OU",
+        "D": "OS"
+      },
+      "correctAnswerIndex": "3"
+    },
+    {
+      "question": "A medication is to be given 'AU'. Where does it go?",
+      "answers": {
+        "A": "In both ears",
+        "B": "In the right eye only",
+        "C": "In the left ear only",
+        "D": "In both eyes"
+      },
+      "correctAnswerIndex": "0"
+    },
+    {
+      "question": "Which is an appropriate way to warm a hypothermic post-op patient?",
+      "answers": {
+        "A": "A towel heated in the microwave, placed directly against the skin.",
+        "B": "A circulating warm water blanket or a forced air warming unit.",
+        "C": "A hair dryer held close to the patient's fur.",
+        "D": "An electric heating pad set to high, placed under the patient."
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "What does the 'contact time' on a disinfectant label tell you?",
+      "answers": {
+        "A": "How long a staff member may safely handle the product.",
+        "B": "How long the room must stay empty after cleaning.",
+        "C": "How long the surface must stay visibly wet with the product for it to kill pathogens.",
+        "D": "How long the bottle is good for after it is opened."
+      },
+      "correctAnswerIndex": "2"
+    },
+    {
+      "question": "It is appropriate to give a client a diagnosis and recommend a prescription over the phone when the doctor is busy.",
+      "answers": {
+        "A": "True",
+        "B": "False"
+      },
+      "correctAnswerIndex": "1"
+    },
+    {
+      "question": "Every patient should be positively identified against their cage card and chart before any treatment is given.",
+      "answers": {
+        "A": "True",
+        "B": "False"
+      },
+      "correctAnswerIndex": "0"
     }
   ]
 }
