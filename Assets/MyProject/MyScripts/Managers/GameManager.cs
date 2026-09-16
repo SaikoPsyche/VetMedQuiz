@@ -73,6 +73,19 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // Added 2026-09-16 by Claude Code: the settings button in StartScreen.unity is
+    // wired to GameManager.Settings(), but no such method existed anywhere in the
+    // project, so Unity dropped the call and the button did nothing.
+    //
+    // This does not load the Settings scene: LoadSettingsScene already adds it
+    // additively from Start, so the panel is present and only needs toggling. The
+    // toggle goes through EventManager because the panel lives in a different scene
+    // and cannot be wired up by inspector reference from this one.
+    public void Settings()
+    {
+        EventManager.ToggleSettings();
+    }
+
     public void CloseApp()
     {
         Application.Quit();

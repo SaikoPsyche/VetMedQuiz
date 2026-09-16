@@ -95,6 +95,14 @@ The cushion and the rounding step are serialized fields.
   rewriting the save file continuously. It now ends the quiz once and clamps the
   displayed clock at zero.
 
+- **The settings button on the start screen did nothing.**
+  `StartScreen.unity` wires it to `GameManager.Settings()`, which existed nowhere
+  in the project, so Unity dropped the call. The method now raises an event that
+  the `Settings` component listens for. It does not load the Settings scene:
+  `GameManager.Start` already adds that scene additively, so the panel is present
+  and only needed toggling, and the panel lives in a different scene so it cannot
+  be reached by inspector reference from the start screen.
+
 - **The score was hard coded to a 10 question quiz** (`score * 10`). It is now
   derived from the number of questions actually asked.
 
@@ -110,9 +118,15 @@ The cushion and the rounding step are serialized fields.
 
 ### Known issues, not addressed here
 
-- `GameManager.Settings()` is wired to the settings button on the start screen
-  but does not exist, so that button does nothing.
-- Three `PlayClickAudio()` button events have no target object assigned.
+- Three `PlayClickAudio()` button events have no target object assigned, so the
+  end screen and answer buttons are silent.
+- The "Next Quiz" button on the end screen is wired only to that targetless
+  `PlayClickAudio` call, so it does nothing.
+- `UserDataCanvas` (the Name / Job / Reason panel) is inactive and nothing
+  activates or populates it.
+
+These three, and the blank True/False buttons below, are uGUI-specific and are
+being left alone while the UI is moved from Canvas to UIDocument.
 - True/False questions have only two options, so the C and D buttons render blank
   but stay clickable, and clicking one counts as a wrong answer.
 - `questionTime` reads as a per-question timer but has always been a whole-quiz

@@ -7,6 +7,19 @@ public class Settings : MonoBehaviour
 {
     [SerializeField] private GameObject settings;
 
+    // Added 2026-09-16 by Claude Code: the settings button in this scene calls
+    // ShowSettings directly, but the one on the start screen cannot reach across
+    // scenes, so it raises an event that this picks up.
+    private void OnEnable()
+    {
+        EventManager.OnToggleSettings += ShowSettings;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnToggleSettings -= ShowSettings;
+    }
+
     public void ShowSettings()
     {
         settings.SetActive(!settings.activeInHierarchy);
