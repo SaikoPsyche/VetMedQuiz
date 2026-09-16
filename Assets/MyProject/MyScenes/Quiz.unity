@@ -5931,6 +5931,7 @@ MonoBehaviour:
   - {fileID: 1362112172}
   - {fileID: 516301347}
   - {fileID: 393915238}
+  questionsPerQuiz: 10
 --- !u!114 &1579336738
 MonoBehaviour:
   m_ObjectHideFlags: 0

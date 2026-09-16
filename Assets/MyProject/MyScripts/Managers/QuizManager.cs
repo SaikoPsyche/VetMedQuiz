@@ -19,15 +19,19 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private Button[] answerButtons;
+    [SerializeField] private int questionsPerQuiz = DefaultQuestionsPerQuiz;
+
+    private const int DefaultQuestionsPerQuiz = 10;
 
     private TextAsset _vetMedText;
-    QuizData _quizQuestions;
+    private List<QuizQuestion> _questions = new List<QuizQuestion>();
     private int score;
     private int _currentQuestionIndex;
 
     private void Awake()
     {
         LoadQuizDifficulty();
+        BuildQuestionSet();
     }
 
     // Start is called before the first frame update
@@ -75,27 +79,60 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    private void ShowQuestions()
+    // Draws this run's questions from the full bank. Called once, in Awake, so the
+    // selection stays fixed for the rest of the quiz. Restarting reloads the scene,
+    // which runs this again and deals a new set.
+    private void BuildQuestionSet()
     {
-        if (_vetMedText != null)
-        {
-            _quizQuestions = JsonUtility.FromJson<QuizData>(_vetMedText.text);
+        _questions = new List<QuizQuestion>();
 
-            QuizQuestion currentQuestion = _quizQuestions.questions[_currentQuestionIndex];
-
-            questionText.text = currentQuestion.question;
-
-            ShowAnswers();
-        }
-        else
+        if (_vetMedText == null)
         {
             Debug.LogError("Unable to load JSON file.");
+            return;
         }
+
+        QuizData quizData = JsonUtility.FromJson<QuizData>(_vetMedText.text);
+
+        if (quizData == null || quizData.questions == null || quizData.questions.Count == 0)
+        {
+            Debug.LogError($"No questions were found in {_vetMedText.name}.");
+            return;
+        }
+
+        // Shuffle a copy so the loaded asset is never reordered.
+        List<QuizQuestion> pool = new List<QuizQuestion>(quizData.questions);
+
+        // A partial Fisher-Yates shuffle: only draw as many as this quiz needs.
+        int wanted = questionsPerQuiz > 0 ? questionsPerQuiz : DefaultQuestionsPerQuiz;
+        int drawCount = Mathf.Min(wanted, pool.Count);
+
+        for (int i = 0; i < drawCount; i++)
+        {
+            int swapIndex = UnityEngine.Random.Range(i, pool.Count);
+
+            QuizQuestion picked = pool[swapIndex];
+            pool[swapIndex] = pool[i];
+            pool[i] = picked;
+
+            _questions.Add(picked);
+        }
+    }
+
+    private void ShowQuestions()
+    {
+        if (_currentQuestionIndex >= _questions.Count) return;
+
+        QuizQuestion currentQuestion = _questions[_currentQuestionIndex];
+
+        questionText.text = currentQuestion.question;
+
+        ShowAnswers();
     }
 
     private void ShowAnswers()
     {
-        var currentQuestion = _quizQuestions.questions[_currentQuestionIndex];
+        var currentQuestion = _questions[_currentQuestionIndex];
 
         for (int i = 0; i < answerButtons.Length; i++)
         {
@@ -130,7 +167,9 @@ public class QuizManager : MonoBehaviour
     public void CheckAnswer(int answerIndex)
     {
         // Find the cureent question
-        var currentQuestion = _quizQuestions.questions[_currentQuestionIndex];
+        if (_currentQuestionIndex >= _questions.Count) return;
+
+        var currentQuestion = _questions[_currentQuestionIndex];
 
         // If the answer index given is the same as the ccurrent question's current answer index,
         // increment the score.
@@ -146,7 +185,7 @@ public class QuizManager : MonoBehaviour
 
         // If the current question index is less than the total number of questions,
         // show the next question.
-        if (_currentQuestionIndex < _quizQuestions.questions.Count) ShowQuestions();
+        if (_currentQuestionIndex < _questions.Count) ShowQuestions();
 
         // If the current question index exeeds the total number of questions,
         // show the end screen with the users name and score.
@@ -156,11 +195,11 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    // Percent is derived from the number of questions actually loaded, so the
+    // Percent is derived from the number of questions actually asked, so the
     // question banks can grow without the final score going over 100%.
     private int CalculateScorePercent()
     {
-        int totalQuestions = _quizQuestions?.questions?.Count ?? 0;
+        int totalQuestions = _questions?.Count ?? 0;
 
         if (totalQuestions <= 0) return 0;
 
