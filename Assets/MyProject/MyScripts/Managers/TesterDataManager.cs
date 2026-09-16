@@ -1,63 +1,47 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
+// Changed 2026-09-16 by Claude Code. This class had three faults that together
+// meant nothing was ever saved:
+//
+//   1. testTakers was declared but never assigned, so the first AddTester call
+//      threw a NullReferenceException on List.Add.
+//   2. SaveTesterData serialized with a BinaryFormatter, but TestTaker was not
+//      marked [Serializable], so the write would have thrown even had it been
+//      reached, and QuizManager read the file back as JSON regardless.
+//   3. The roster was held in a field on a MonoBehaviour that exists in both
+//      scenes, so moving from the start screen to the quiz created a fresh
+//      instance with an empty list.
+//
+// The roster now lives on disk and is read through TesterDataStore whenever it is
+// needed, which removes all three.
 public class TesterDataManager : MonoBehaviour
 {
-    private List<TestTaker> testTakers;
-    private string savePath;
-
     private void OnEnable()
     {
         EventManager.OnAddTester += AddTester;
         EventManager.OnSaveData += SaveTesterData;
     }
 
-    /*public void SaveTesterData(TestTaker testTakers)
-    {
-        try
-        {
-            string jsonData = JsonUtility.ToJson(testTakers);
-            string filePath = Application.persistentDataPath + "/playerData.json";
-            File.WriteAllText(filePath, jsonData);
-            Debug.Log($"Saved: {jsonData} at {filePath}");
-        }
-        catch(Exception ex)
-        {
-            Debug.Log(ex.Message + ", " + ex.StackTrace);
-        }
-    }*/
-
-    public void SaveTesterData(List<TestTaker> testers)
-    {
-        string filePath = Application.persistentDataPath + "/playerData.json";
-
-        BinaryFormatter formatter = new();
-        FileStream fileStream = new(filePath, FileMode.Create);
-
-        formatter.Serialize(fileStream, testers);
-        fileStream.Close();
-    }
-
-    public void AddTester(string testerName, int difficulty)
-    {
-        TestTaker tester = new(testerName)
-        {
-            difficulty = difficulty
-        };
-        testTakers.Add(tester);
-        SaveTesterData(testTakers);
-    }
-
     private void OnDisable()
     {
         EventManager.OnAddTester -= AddTester;
         EventManager.OnSaveData -= SaveTesterData;
+    }
+
+    public void AddTester(string testerName, int difficulty)
+    {
+        TestTakerRoster roster = TesterDataStore.Load();
+
+        roster.testTakers.Add(new TestTaker(testerName) { difficulty = difficulty });
+
+        TesterDataStore.Save(roster);
+    }
+
+    public void SaveTesterData(List<TestTaker> testers)
+    {
+        if (testers == null) return;
+
+        TesterDataStore.Save(new TestTakerRoster { testTakers = testers });
     }
 }

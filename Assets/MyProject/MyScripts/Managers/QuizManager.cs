@@ -16,18 +16,16 @@
 //                        the nearest 30s, instead of one fixed time per quiz.
 //   * ShowQuestionTime   Changed. Now renders minutes as well as seconds, which
 //                        it has to once a quiz can run past a minute.
+//   * LoadQuizDifficulty Changed. Reads the saved tester through TesterDataStore,
+//                        and falls back to the student bank when there is none
+//                        instead of loading no questions at all.
+//   * SaveFinalScore     Changed. Was unreachable in the normal case and wrote
+//                        nothing; now records the score and runs exactly once.
 // ----------------------------------------------------------------------------
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
@@ -72,6 +70,11 @@ public class QuizManager : MonoBehaviour
     private int score;
     private int _currentQuestionIndex;
 
+    // Added 2026-09-16 by Claude Code: QuestionTimer runs from Update, so once the
+    // clock hit zero it called SaveFinalScore on every frame, rewriting the save
+    // file sixty-odd times a second. This latches the end of the quiz.
+    private bool _quizFinished;
+
     private void Awake()
     {
         LoadQuizDifficulty();
@@ -93,37 +96,23 @@ public class QuizManager : MonoBehaviour
         QuestionTimer();
     }
 
+    // Changed 2026-09-16 by Claude Code: this read the save file by hand, parsing a
+    // whole roster as a single TestTaker, and left _vetMedText null whenever the file
+    // was missing or unreadable, which meant no questions loaded at all. It now reads
+    // through TesterDataStore and always ends up with a bank, so opening the quiz
+    // scene on its own gives a playable quiz instead of an empty one.
     private void LoadQuizDifficulty()
     {
-        string filePath = Application.persistentDataPath + "/playerData.json";
-        
+        TestTaker tester = TesterDataStore.CurrentTester();
 
-        if (File.Exists(filePath))
+        switch (tester?.difficulty)
         {
-            try
-            {
-                string savedJsonData = File.ReadAllText(filePath);
-
-                if (!string.IsNullOrEmpty(savedJsonData))
-                {
-                    TestTaker tester = JsonUtility.FromJson<TestTaker>(savedJsonData);
-                    
-                    switch (tester.difficulty)
-                    {
-                        case 0:
-                            _vetMedText = Resources.Load<TextAsset>("VetMedQuestions");
-                            break;
-                        case 1:
-                            _vetMedText = Resources.Load<TextAsset>("VetMedQuestions_VetTech");
-                            break;
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.Message + ", " + ex.StackTrace);
-            }
+            case 1:
+                _vetMedText = Resources.Load<TextAsset>("VetMedQuestions_VetTech");
+                break;
+            default:
+                _vetMedText = Resources.Load<TextAsset>("VetMedQuestions");
+                break;
         }
     }
 
@@ -256,14 +245,14 @@ public class QuizManager : MonoBehaviour
 
     public void CheckAnswer(int answerIndex)
     {
-        // Find the cureent question
+        // Find the current question
         // Guard added 2026-09-16 by Claude Code: without it, clicking an answer
         // after a failed load threw a NullReferenceException.
         if (_currentQuestionIndex >= _questions.Count) return;
 
         var currentQuestion = _questions[_currentQuestionIndex];
 
-        // If the answer index given is the same as the ccurrent question's current answer index,
+        // If the answer index given is the same as the current question's current answer index,
         // increment the score.
         if (answerIndex == currentQuestion.correctAnswerIndex) score++;
 
@@ -279,7 +268,7 @@ public class QuizManager : MonoBehaviour
         // show the next question.
         if (_currentQuestionIndex < _questions.Count) ShowQuestions();
 
-        // If the current question index exeeds the total number of questions,
+        // If the current question index exceeds the total number of questions,
         // show the end screen with the users name and score.
         else
         {
@@ -313,64 +302,60 @@ public class QuizManager : MonoBehaviour
         timerText.text = $"{minutes:00}:{seconds:00} secs";
     }
 
+    // Changed 2026-09-16 by Claude Code: added the _quizFinished latch and clamped
+    // the clock at zero, so time running out ends the quiz once rather than calling
+    // SaveFinalScore on every frame from then on.
     private void QuestionTimer()
     {
+        if (_quizFinished) return;
+
         if (questionTime > 0)
         {
             questionTime -= Time.deltaTime;
 
-            /*if (questionTime < 0)
-                questionTime = 0;*/
+            if (questionTime < 0) questionTime = 0;
 
             ShowQuestionTime();
         }
         else
         {
+            ShowQuestionTime();
             SaveFinalScore();
         }
     }
 
+    // Changed 2026-09-16 by Claude Code. As written this method could not do its
+    // job: when a save file existed it tried to BinaryFormatter.Deserialize a file
+    // that was meant to hold JSON, threw, and was swallowed by the catch, leaving
+    // scoreText untouched. The score was only ever displayed by the else branch,
+    // which runs when there is NO save file, so the display was inverted and the
+    // score was never written back. The percentage also came from "score * 10",
+    // which was only correct while every quiz was exactly 10 questions long.
     private void SaveFinalScore()
     {
-        string filePath = Application.persistentDataPath + "/playerData.json";
+        // Reachable from both the last answer and the clock expiring, and the end
+        // screen should only be raised once.
+        if (_quizFinished) return;
 
-        if (File.Exists(filePath))
+        _quizFinished = true;
+
+        int percent = CalculateScorePercent();
+
+        TestTakerRoster roster = TesterDataStore.Load();
+        TestTaker tester = TesterDataStore.MostRecent(roster);
+
+        if (tester != null)
         {
-            try
-            {
-                /*string savedJsonData = File.ReadAllText(filePath);
+            tester.score = percent;
+            EventManager.SaveData(roster.testTakers);
 
-                if (!string.IsNullOrEmpty(savedJsonData))
-                {
-                    TestTaker tester = JsonUtility.FromJson<TestTaker>(savedJsonData);
-
-                    tester.score = this.score;
-                    EventManager.SaveData(tester);
-
-                    scoreText.text = $"{tester.testerName} earned a score of {score * 10}%!"; // score out of 10 questions * 10 gives percent.
-
-                    savedJsonData = File.ReadAllText(filePath);
-                    Debug.Log("Loaded: " + savedJsonData);
-                }*/
-
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream fileStream = new FileStream(filePath, FileMode.Open);
-
-                List<TestTaker> testTakers = (List<TestTaker>)formatter.Deserialize(fileStream);
-                fileStream.Close();
-
-
-            }
-            catch (Exception ex)
-            {
-                Debug.Log(ex.Message + ", " + ex.StackTrace);
-            }
-
+            scoreText.text = $"{tester.testerName} earned a score of {percent}%!";
         }
         else
-            // Changed 2026-09-16 by Claude Code: was "score * 10", which was only
-            // correct while every quiz was exactly 10 questions long.
-            scoreText.text = $"Player earned a score of {CalculateScorePercent()}%!";
+        {
+            // Nobody came through the start screen, so there is no name to show.
+            scoreText.text = $"Player earned a score of {percent}%!";
+        }
 
         // Show Final Score Screen and Corrections
         endGameScreen.SetActive(true);
