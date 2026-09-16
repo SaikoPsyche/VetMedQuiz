@@ -3,7 +3,7 @@
   "_changeHistory": [
     "2026-09-16 - Claude Code - Added 32 student level questions after the original 10, covering clinical abbreviations, normal vitals, directional anatomy, zoonoses, parasite transmission, restraint, radiation safety, sharps handling and clinic protocol. The original 10 questions were not modified.",
     "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B.",
-    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws and adds a 15s cushion to set the clock for the run."
+    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws, adds a 15s cushion, then rounds to the nearest 30s so the player starts on a round number."
   ],
   "questions": [
     {

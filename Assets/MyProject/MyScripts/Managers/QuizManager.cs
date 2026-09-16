@@ -12,8 +12,8 @@
 //   * CalculateScorePercent
 //                        Added. Replaces a hard coded "score * 10" percentage.
 //   * BuildQuizTimer     Added. Sets the clock from the sum of the drawn
-//                        questions' secondsToAnswer, plus a cushion, instead of
-//                        using one fixed time for every quiz.
+//                        questions' secondsToAnswer, plus a cushion, rounded to
+//                        the nearest 30s, instead of one fixed time per quiz.
 //   * ShowQuestionTime   Changed. Now renders minutes as well as seconds, which
 //                        it has to once a quiz can run past a minute.
 // ----------------------------------------------------------------------------
@@ -52,8 +52,13 @@ public class QuizManager : MonoBehaviour
     // times, to cover reading the screen and settling in at the start of a run.
     [SerializeField] private float timeCushionSeconds = DefaultTimeCushionSeconds;
 
+    // Added 2026-09-16 by Claude Code: the clock is rounded to a multiple of this
+    // so players start on a round number rather than an arbitrary 4m55s.
+    [SerializeField] private float timerRoundingSeconds = DefaultTimerRoundingSeconds;
+
     private const int DefaultQuestionsPerQuiz = 10;
     private const float DefaultTimeCushionSeconds = 15f;
+    private const float DefaultTimerRoundingSeconds = 30f;
 
     // Used only if a question carries no secondsToAnswer, so an older or hand
     // edited bank cannot leave the quiz with almost no time on the clock.
@@ -168,7 +173,9 @@ public class QuizManager : MonoBehaviour
     //
     // The quiz clock is the sum of the drawn questions' own estimates plus a
     // cushion, so a run of short recall questions gets less time than a run that
-    // happens to deal several dosage calculations.
+    // happens to deal several dosage calculations. The result is rounded to a
+    // round number of seconds, because starting on 3m00s reads better to a player
+    // than starting on the 2m55s the estimates happen to add up to.
     private void BuildQuizTimer()
     {
         // Nothing was drawn, so leave the inspector value as the fallback.
@@ -183,7 +190,19 @@ public class QuizManager : MonoBehaviour
                 : FallbackSecondsPerQuestion;
         }
 
-        questionTime = total + timeCushionSeconds;
+        questionTime = RoundToNearest(total + timeCushionSeconds, timerRoundingSeconds);
+    }
+
+    // Added 2026-09-16 by Claude Code.
+    //
+    // Rounding can only ever take the cushion back, never bite into the questions'
+    // own estimates: the most it can subtract is half the step, and the step is
+    // twice the cushion.
+    private float RoundToNearest(float seconds, float step)
+    {
+        if (step <= 0f) return seconds;
+
+        return Mathf.Round(seconds / step) * step;
     }
 
     // Changed 2026-09-16 by Claude Code: this used to call JsonUtility.FromJson on
