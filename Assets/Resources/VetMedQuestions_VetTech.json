@@ -3,7 +3,8 @@
   "_changeHistory": [
     "2026-09-16 - Claude Code - Added 32 credentialed technician level questions after the original 10, covering dosage and fluid rate math, anesthesia monitoring and reversal agents, breathing circuits and oxygen supply, hematology and urinalysis interpretation, dentistry, radiographic exposure factors, CPR per RECOVER, toxicology and transfusion medicine. The original 10 questions were not modified.",
     "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B.",
-    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws, adds a 15s cushion, then rounds to the nearest 30s so the player starts on a round number."
+    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws, adds a 15s cushion, then rounds to the nearest 30s so the player starts on a round number.",
+    "2026-09-16 - Claude Code - Corrected misspellings in the original questions: Ehrlicia to Ehrlichia, Leptosporosis to Leptospirosis, dermataphyte to dermatophyte, floation to flotation, scrapinhg to scraping, plus capitalisation and apostrophes. No answer keys changed."
   ],
   "questions": [
     {
@@ -40,12 +41,12 @@
       "secondsToAnswer": 30
     },
     {
-      "question": "What is dermataphyte? WHat is the best way to test for it?",
+      "question": "What is dermatophyte? What is the best way to test for it?",
       "answers": {
-        "A": "It is a bacterium thats tested for by checking a skin cytology.",
-        "B": "It is a fungus thats tested for by taking a sample of the fur and growing that sample on a sterile medium or running a Dermatophyte PCR.",
-        "C": "It is a protozoa that tested for by checking a fecal floation",
-        "D": "It is a fungus thats tested for by checking a fecal smear."
+        "A": "It is a bacterium that's tested for by checking a skin cytology.",
+        "B": "It is a fungus that's tested for by taking a sample of the fur and growing that sample on a sterile medium or running a Dermatophyte PCR.",
+        "C": "It is a protozoa that's tested for by checking a fecal flotation",
+        "D": "It is a fungus that's tested for by checking a fecal smear."
       },
       "correctAnswerIndex": "1",
       "secondsToAnswer": 50
@@ -86,7 +87,7 @@
     {
       "question": "How do you test for ear mites?",
       "answers": {
-        "A": "Get a skin scrapinhg for a skin cytology.",
+        "A": "Get a skin scraping for a skin cytology.",
         "B": "Check an ear cytology.",
         "C": "Run a fecal flotation.",
         "D": "Run a 4DX."

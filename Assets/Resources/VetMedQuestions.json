@@ -3,7 +3,8 @@
   "_changeHistory": [
     "2026-09-16 - Claude Code - Added 32 student level questions after the original 10, covering clinical abbreviations, normal vitals, directional anatomy, zoonoses, parasite transmission, restraint, radiation safety, sharps handling and clinic protocol. The original 10 questions were not modified.",
     "2026-09-16 - Claude Code - Correct answers in the added questions are spread across all four positions, so the bank cannot be gamed by always guessing A or B.",
-    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws, adds a 15s cushion, then rounds to the nearest 30s so the player starts on a round number."
+    "2026-09-16 - Claude Code - Added a secondsToAnswer field to every question. It is an estimate of reading time (word count of the stem and all options at an effective 150 wpm) plus thinking time by question type (10s straight recall, 20s applied reasoning, 45s calculation), rounded to the nearest 5s and clamped to 15-90s. QuizManager sums these over the questions it draws, adds a 15s cushion, then rounds to the nearest 30s so the player starts on a round number.",
+    "2026-09-16 - Claude Code - Corrected misspellings in the original questions: Ehrlicia to Ehrlichia, Leptosporosis to Leptospirosis, dermataphyte to dermatophyte, floation to flotation, scrapinhg to scraping, plus capitalisation and apostrophes. No answer keys changed."
   ],
   "questions": [
     {
@@ -64,10 +65,10 @@
     {
       "question": "A 4DX tests for the following:",
       "answers": {
-        "A": "Heartworm, Lyme Disease, Ehrlicia and Leptosporosis",
-        "B": "Leptosporosis, Lyme, Rabies and Parvovirus",
-        "C": "Heartworm, Lyme Disease, Ehrlicia and Anaplasma",
-        "D": "Rabies, Parvo, Kennel Cough and Cushings Disease"
+        "A": "Heartworm, Lyme Disease, Ehrlichia and Leptospirosis",
+        "B": "Leptospirosis, Lyme, Rabies and Parvovirus",
+        "C": "Heartworm, Lyme Disease, Ehrlichia and Anaplasma",
+        "D": "Rabies, Parvo, Kennel Cough and Cushing's Disease"
       },
       "correctAnswerIndex": "2",
       "secondsToAnswer": 20
