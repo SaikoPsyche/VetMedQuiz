@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SoundManager : MonoBehaviour
 {
@@ -14,11 +10,29 @@ public class SoundManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnCorrectAnswer += PlayAnsAudio;
+
+        // Added 2026-09-18 by Claude Code: the UI Toolkit buttons cannot call these
+        // directly the way the old uGUI UnityEvents did.
+        EventManager.OnPlayClick += PlayClickAudio;
+        EventManager.OnMusicMuted += SetMusicMuted;
+        EventManager.OnClickMuted += SetClickMuted;
     }
 
     public void PlayClickAudio()
     {
-        clickAudio.Play();
+        if (clickAudio != null) clickAudio.Play();
+    }
+
+    private void SetMusicMuted(bool muted)
+    {
+        if (muted) MuteBGAudio();
+        else PlayBgAudio();
+    }
+
+    private void SetClickMuted(bool muted)
+    {
+        if (muted) MuteClickAudio();
+        else UnMuteClickAudio();
     }
 
     public void UnMuteClickAudio()
@@ -66,5 +80,8 @@ public class SoundManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.OnCorrectAnswer -= PlayAnsAudio;
+        EventManager.OnPlayClick -= PlayClickAudio;
+        EventManager.OnMusicMuted -= SetMusicMuted;
+        EventManager.OnClickMuted -= SetClickMuted;
     }
 }

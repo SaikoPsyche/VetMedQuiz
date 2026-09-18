@@ -11,6 +11,18 @@ public class PlayerData : ScriptableObject
 
     public void UpdateEndDisplayText()
     {
-        EndDisplayText = $"{PlayerName} earned a score of {PlayerScore}/{TOTAL_QUESTIONS}!";
+        UpdateEndDisplayText(TOTAL_QUESTIONS);
+    }
+
+    // Added 2026-09-18 by Claude Code: QuizManager.questionsPerQuiz is settable and
+    // clamps to the size of the bank, so the quiz is not always ten questions long.
+    // Taking the total from the caller keeps the end text honest when it is not.
+    public void UpdateEndDisplayText(int totalQuestions)
+    {
+        if (totalQuestions <= 0) totalQuestions = TOTAL_QUESTIONS;
+
+        string who = string.IsNullOrWhiteSpace(PlayerName) ? "Player" : PlayerName;
+
+        EndDisplayText = $"{who} earned a score of {PlayerScore}/{totalQuestions}!";
     }
 }

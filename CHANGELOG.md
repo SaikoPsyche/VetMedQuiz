@@ -116,17 +116,60 @@ The cushion and the rounding step are serialized fields.
   `Cushings Disease` to `Cushing's Disease`. Display text only — no answer keys,
   option ordering or timings changed.
 
+### UI Toolkit port
+
+The three Canvas scenes were replaced by five UIDocuments inside `Quiz.unity`, so
+the C# that drove the old uGUI hierarchy was rewritten against it.
+
+`UIManager` is new and owns the views: it finds the five documents by their visual
+tree asset name (no inspector wiring), caches the elements, registers the button
+callbacks, and switches screens. Screens are hidden with `style.display` rather
+than by deactivating the GameObject, because a UIDocument rebuilds its visual tree
+whenever it is re-enabled, which would invalidate every cached element and drop
+every registered callback.
+
+`QuizManager` keeps the quiz logic unchanged - the draw, the timer, the scoring -
+and lost its `Button[]`, `TextMeshProUGUI` and `SetActive` fields.
+
+Fixes that the merge into one scene made necessary:
+
+- **The quiz used to start before the player chose anything.** `Awake` loaded a
+  bank, drew the questions and started the clock. That was safe while the start
+  screen was a separate scene loaded earlier; in one scene it ran immediately, so
+  the bank came from whatever was last written to disk and the countdown ran
+  during the welcome screen. `BeginQuiz(difficulty)` is now called when a level is
+  chosen, and the clock only ticks while a quiz is running.
+- **`GameManager.Start` loaded a scene that no longer exists.** It additively
+  loaded Settings at build index 2 on every launch. Removed; the settings panel is
+  a document in this scene, shown via `EventManager.ToggleSettings`.
+- **Build settings listed two deleted scenes.** `StartScreen.unity` and
+  `Settings.unity` were still entries, which also broke the `buildIndex + 1` and
+  `LoadScene(0)` arithmetic in `GameManager`. Only `Quiz.unity` remains.
+- **True/False questions** now hide the two unused answer buttons via
+  `DisplayStyle.None` instead of showing them blank but still clickable.
+- **Button sounds** go through new `EventManager` events, since a `VisualElement`
+  cannot carry the UnityEvent wiring the uGUI buttons used.
+- **`PlayerData.UpdateEndDisplayText`** takes the real question count. It hard
+  coded 10, but `questionsPerQuiz` is settable and clamps to the bank size, so a
+  quiz of a different length would have reported "12/10".
+
+Data split, as agreed: `PlayerData` carries the run in progress and drives the
+bound labels; `TesterDataStore` writes the finished result to disk, because a
+ScriptableObject does not persist its runtime values in a build.
+
 ### Known issues, not addressed here
 
-- Three `PlayClickAudio()` button events have no target object assigned, so the
-  end screen and answer buttons are silent.
-- The "Next Quiz" button on the end screen is wired only to that targetless
-  `PlayClickAudio` call, so it does nothing.
-- `UserDataCanvas` (the Name / Job / Reason panel) is inactive and nothing
-  activates or populates it.
-
-These three, and the blank True/False buttons below, are uGUI-specific and are
-being left alone while the UI is moved from Canvas to UIDocument.
+- `LevelScreen.uxml` binds `PlayerName` to the name field's `placeholderText`,
+  which is display only, so the binding never captures what the player types.
+  `UIManager` reads `TextField.value` directly instead. Binding `value` with
+  `binding-mode="TwoWay"` would let the binding do it.
+- `Settings.cs` and `StartScreenManager.cs` are superseded by `UIManager` and are
+  in no scene. `Settings.cs` still subscribes to `OnToggleSettings`, so it would
+  double-handle the toggle if it were ever added back to a scene.
+- `GameManager.HomeScreen` and `GameManager.StartGame` load scene indices that no
+  longer exist. Nothing calls them; they are marked but not deleted.
+- The settings document sits below the others in the panel sort order, so
+  `UIManager` raises it while open and lowers it on close.
 - True/False questions have only two options, so the C and D buttons render blank
   but stay clickable, and clicking one counts as a wrong answer.
 - `questionTime` reads as a per-question timer but has always been a whole-quiz

@@ -7,25 +7,15 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    private void Start()
-    {
-        // Load Settings Additively to the current scene.
-        LoadSettingsScene();
-    }
+    // Removed 2026-09-18 by Claude Code: Start used to additively load the Settings
+    // scene at index 2. That scene no longer exists - its UI is now the Settings
+    // Document inside this one - so the load ran on every launch and failed. The
+    // settings panel is shown by UIManager in response to EventManager.ToggleSettings.
 
-    private void LoadSettingsScene()
-    {
-        try
-        {
-            int buildIndex = SceneManager.GetSceneByName("Settings").buildIndex;
-            SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(ex.Message + " ," + ex.StackTrace);
-        }
-    }
-
+    // Unreachable as of 2026-09-18 (Claude Code): with all three screens merged into
+    // this scene there is no scene 0 to return to, and nothing calls this any more.
+    // Screen changes go through UIManager. Kept rather than deleted in case it is
+    // wanted for a future multi-scene layout - it will not work as written.
     // Go to the first scene
     public void HomeScreen()
     {
@@ -56,6 +46,8 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // Unreachable as of 2026-09-18 (Claude Code): same as HomeScreen. There is no
+    // scene at buildIndex + 1 any more; UIManager shows the level screen instead.
     // Get the build Index of the active scene (Start Screen SCene) then add 1 and load that scene to start the quiz.
     public void StartGame()
     {

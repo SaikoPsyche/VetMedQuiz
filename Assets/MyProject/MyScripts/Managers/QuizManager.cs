@@ -21,26 +21,28 @@
 //                        instead of loading no questions at all.
 //   * SaveFinalScore     Changed. Was unreachable in the normal case and wrote
 //                        nothing; now records the score and runs exactly once.
+//
+// 2026-09-18 - Claude Code
+//   * Ported off uGUI. The Button[] / TextMeshProUGUI / SetActive fields are gone;
+//     UIManager owns the views and this owns the quiz. The logic below - the draw,
+//     the timer, the scoring - is unchanged by the port.
+//   * BeginQuiz         Added, replacing the work Awake used to do. All three
+//                       scenes are now one, so Awake ran before the player had
+//                       chosen a difficulty: the bank was picked from whatever was
+//                       last saved to disk and the clock started during the
+//                       welcome screen. The quiz now starts when a level is
+//                       chosen, and the clock only runs while it is running.
 // ----------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
-    [SerializeField] private GameObject quiz;
-    [SerializeField] private GameObject endGameScreen;
-    [SerializeField] private TextMeshProUGUI questionText;
-
     // Changed 2026-09-16 by Claude Code: BuildQuizTimer overwrites this at startup
     // with the time the drawn questions are actually expected to need. The value
     // set in the inspector is only used as a fallback if no questions load.
     [SerializeField] private float questionTime;
-    [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private Button[] answerButtons;
     // Added 2026-09-16 by Claude Code: the quiz length used to be implied by the
     // size of the JSON file. Now that the banks hold more than one quiz worth of
     // questions, the length is set here and the questions are drawn at random.
@@ -62,7 +64,15 @@ public class QuizManager : MonoBehaviour
     // edited bank cannot leave the quiz with almost no time on the clock.
     private const int FallbackSecondsPerQuestion = 20;
 
+    private const string PlayerAssetName = "Player";
+
+    private UIManager _ui;
+    private PlayerData _player;
     private TextAsset _vetMedText;
+
+    // Added 2026-09-18 by Claude Code: the clock must not tick on the welcome or
+    // level screens, which share this scene now.
+    private bool _quizRunning;
 
     // Changed 2026-09-16 by Claude Code: was a QuizData holding the entire bank.
     // This is now only the questions drawn for this run.
@@ -75,45 +85,51 @@ public class QuizManager : MonoBehaviour
     // file sixty-odd times a second. This latches the end of the quiz.
     private bool _quizFinished;
 
+    // Changed 2026-09-18 by Claude Code: Awake used to load a bank, draw the
+    // questions and start the clock. With one scene that all happened before the
+    // player had picked anything, so it now only resolves collaborators and waits
+    // for BeginQuiz.
     private void Awake()
     {
-        LoadQuizDifficulty();
+        _ui = GetComponent<UIManager>();
 
-        // Added 2026-09-16 by Claude Code: draw the questions once, up front,
-        // then size the clock to the questions that were actually drawn.
-        BuildQuestionSet();
-        BuildQuizTimer();
-    }
+        if (_ui == null)
+            Debug.LogError("QuizManager expects a UIManager on the same GameObject.");
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        ShowQuestions();
+        _player = Resources.Load<PlayerData>(PlayerAssetName);
     }
 
     private void Update()
     {
-        QuestionTimer();
+        if (_quizRunning) QuestionTimer();
     }
 
-    // Changed 2026-09-16 by Claude Code: this read the save file by hand, parsing a
-    // whole roster as a single TestTaker, and left _vetMedText null whenever the file
-    // was missing or unreadable, which meant no questions loaded at all. It now reads
-    // through TesterDataStore and always ends up with a bank, so opening the quiz
-    // scene on its own gives a playable quiz instead of an empty one.
-    private void LoadQuizDifficulty()
+    // Added 2026-09-18 by Claude Code. Called by UIManager once a difficulty is
+    // chosen, which is the first moment both the bank and the player are known.
+    public void BeginQuiz(int difficulty)
     {
-        TestTaker tester = TesterDataStore.CurrentTester();
+        score = 0;
+        _currentQuestionIndex = 0;
+        _quizFinished = false;
 
-        switch (tester?.difficulty)
-        {
-            case 1:
-                _vetMedText = Resources.Load<TextAsset>("VetMedQuestions_VetTech");
-                break;
-            default:
-                _vetMedText = Resources.Load<TextAsset>("VetMedQuestions");
-                break;
-        }
+        LoadQuizDifficulty(difficulty);
+        BuildQuestionSet();
+        BuildQuizTimer();
+
+        _quizRunning = _questions.Count > 0;
+
+        ShowQuestionTime();
+        ShowQuestions();
+    }
+
+    // Changed 2026-09-18 by Claude Code: the difficulty now arrives from the button
+    // that was pressed rather than being read back out of the save file, which only
+    // worked while the start screen was a separate scene loaded earlier.
+    private void LoadQuizDifficulty(int difficulty)
+    {
+        _vetMedText = difficulty == 1
+            ? Resources.Load<TextAsset>("VetMedQuestions_VetTech")
+            : Resources.Load<TextAsset>("VetMedQuestions");
     }
 
     // Added 2026-09-16 by Claude Code.
@@ -204,44 +220,25 @@ public class QuizManager : MonoBehaviour
 
         QuizQuestion currentQuestion = _questions[_currentQuestionIndex];
 
-        questionText.text = currentQuestion.question;
-
-        ShowAnswers();
+        _ui?.ShowQuestion(currentQuestion.question, OptionsOf(currentQuestion));
     }
 
-    private void ShowAnswers()
+    // Changed 2026-09-18 by Claude Code: replaces ShowAnswers, which wrote into four
+    // uGUI buttons. Options C and D are absent on True/False questions, and come
+    // back as empty entries that UIManager takes out of the layout.
+    private static IReadOnlyList<string> OptionsOf(QuizQuestion question)
     {
-        var currentQuestion = _questions[_currentQuestionIndex];
+        AnswerOptions answers = question.answers;
 
-        for (int i = 0; i < answerButtons.Length; i++)
+        return new[]
         {
-            if (answerButtons[i] != null)
-            {
-                switch (i)
-                {
-                    case 0:
-                        answerButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.answers.A;
-                        break;
-                    case 1:
-                        answerButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.answers.B;
-                        break;
-                    case 2:
-                        answerButtons[2].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.answers.C;
-                        break;
-                    case 3:
-                        answerButtons[3].GetComponentInChildren<TextMeshProUGUI>().text = currentQuestion.answers.D;
-                        break;
-                    default:
-                        answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
-                        break;
-                }
-            }
-            else
-            {
-                Debug.LogError($"Answer Button {answerButtons[i]} can not be found.");
-            }
-        }
+            answers != null ? answers.A : null,
+            answers != null ? answers.B : null,
+            answers != null ? answers.C : null,
+            answers != null ? answers.D : null,
+        };
     }
+
 
     public void CheckAnswer(int answerIndex)
     {
@@ -298,8 +295,10 @@ public class QuizManager : MonoBehaviour
         int minutes = remaining / 60;
         int seconds = remaining % 60;
 
-        // Update the UI Text to display the remaining time
-        timerText.text = $"{minutes:00}:{seconds:00} secs";
+        // Changed 2026-09-18 by Claude Code: writes to the Timer label in
+        // QuizScreen.uxml, whose own default is "00:00", so the "secs" suffix the
+        // uGUI version carried is dropped to match.
+        _ui?.ShowTime($"{minutes:00}:{seconds:00}");
     }
 
     // Changed 2026-09-16 by Claude Code: added the _quizFinished latch and clamped
@@ -331,6 +330,11 @@ public class QuizManager : MonoBehaviour
     // which runs when there is NO save file, so the display was inverted and the
     // score was never written back. The percentage also came from "score * 10",
     // which was only correct while every quiz was exactly 10 questions long.
+    // Changed 2026-09-18 by Claude Code. The end text is no longer written straight
+    // into a label: the Score label in End Document.uxml is data-bound to
+    // PlayerData.EndDisplayText, so updating the ScriptableObject drives the display.
+    // The roster on disk is still written, because a ScriptableObject does not
+    // persist its runtime values in a build.
     private void SaveFinalScore()
     {
         // Reachable from both the last answer and the clock expiring, and the end
@@ -338,8 +342,16 @@ public class QuizManager : MonoBehaviour
         if (_quizFinished) return;
 
         _quizFinished = true;
+        _quizRunning = false;
 
+        int answered = _questions.Count;
         int percent = CalculateScorePercent();
+
+        if (_player != null)
+        {
+            _player.PlayerScore = score;
+            _player.UpdateEndDisplayText(answered);
+        }
 
         TestTakerRoster roster = TesterDataStore.Load();
         TestTaker tester = TesterDataStore.MostRecent(roster);
@@ -348,17 +360,8 @@ public class QuizManager : MonoBehaviour
         {
             tester.score = percent;
             EventManager.SaveData(roster.testTakers);
-
-            scoreText.text = $"{tester.testerName} earned a score of {percent}%!";
-        }
-        else
-        {
-            // Nobody came through the start screen, so there is no name to show.
-            scoreText.text = $"Player earned a score of {percent}%!";
         }
 
-        // Show Final Score Screen and Corrections
-        endGameScreen.SetActive(true);
-        quiz.SetActive(false);
+        _ui?.ShowEndScreen();
     }
 }
