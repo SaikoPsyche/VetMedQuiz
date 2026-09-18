@@ -1,0 +1,7 @@
+:root {
+}
+
+.button-text {
+    font-size: 21px;
+    white-space: normal;
+}

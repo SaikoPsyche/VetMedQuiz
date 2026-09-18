@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Container" style="flex-grow: 1; align-items: center; justify-content: center;">
+        <ui:Image name="BG" source="" scale-mode="StretchToFill" style="height: 846px; width: 537px; visibility: visible; background-image: url(&quot;project://database/Assets/Saurabh%20Studio/Awesome%20Game%20UI%20pack%209/Dialogue%20Back%203/5.png?fileID=2800000&amp;guid=ae66985019f18644d91dd4ee6fcc8ff5&amp;type=3#5&quot;); align-items: center; top: 27px;">
+            <ui:Image name="Title" source="" style="height: 198px; background-image: url(&quot;project://database/Assets/Saurabh%20Studio/Awesome%20Game%20UI%20pack%208/Bubble%20Style%20Pack/Bubble%20Button%204/Dailogue-Back.png?fileID=2800000&amp;guid=4e299201e2953dd40b0b5c0066f02c84&amp;type=3#Dailogue-Back&quot;); width: 414px; top: 170px; align-items: center;">
+                <ui:Image name="Highlight" style="height: 69px; background-image: url(&quot;project://database/Assets/Saurabh%20Studio/Awesome%20Game%20UI%20pack%208/Bubble%20Style%20Pack/Bubble%20Button%201/Rectangle%20Button.png?fileID=2800000&amp;guid=835278b79e8a90a4e87fee46996844bf&amp;type=3#Rectangle Button&quot;); width: 263px; top: 43px; font-size: 36px;">
+                    <ui:Label text="Welcome to the" style="height: 63px; width: 252px; bottom: 43px; left: -14px; font-size: 36px; -unity-text-align: upper-center;"/>
+                    <ui:Label text="Vet Med Quiz" style="bottom: 60px; -unity-text-align: upper-center; font-size: 36px; height: 26px; color: rgb(255, 255, 255);"/>
+                    <ui:Label text="Let&apos;s Test&#10;Your Knowledge" style="font-size: 36px; -unity-text-align: upper-center; bottom: 57px; top: -48px;"/>
+                </ui:Image>
+            </ui:Image>
+            <ui:Button text="Start Game" name="Start" style="top: 309px; background-image: url(&quot;project://database/Assets/Saurabh%20Studio/Awesome%20Game%20UI%20pack%208/Bubble%20Style%20Pack/Bubble%20Button%204/Rectangle%20Button.png?fileID=2800000&amp;guid=9eff1f219b7a4c6409ec2622841e9c5f&amp;type=3#Rectangle Button&quot;); height: 114px; width: 163px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); -unity-background-scale-mode: stretch-to-fill; font-size: 24px;"/>
+        </ui:Image>
+    </ui:VisualElement>
+</ui:UXML>
