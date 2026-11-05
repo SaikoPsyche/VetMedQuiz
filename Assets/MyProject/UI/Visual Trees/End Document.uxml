@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Container" style="flex-grow: 1;">
+    <ui:VisualElement name="Container" style="flex-grow: 1; align-items: center;">
         <ui:Image name="BG" style="height: 862px; width: 530px; background-image: url(&quot;project://database/Assets/Saurabh%20Studio/Awesome%20Game%20UI%20pack%209/Dialogue%20Back%203/5.png?fileID=2800000&amp;guid=ae66985019f18644d91dd4ee6fcc8ff5&amp;type=3#5&quot;); top: 30px; left: auto; right: 17px; visibility: visible;">
             <ui:Image name="ScoreBG" style="visibility: visible; height: 116px; width: 467px; left: 29px; top: 224px; background-image: url(&quot;project://database/Assets/Saurabh%20Studio/Awesome%20Game%20UI%20pack%208/Bubble%20Style%20Pack/Bubble%20Button%204/Dailogue-Back.png?fileID=2800000&amp;guid=4e299201e2953dd40b0b5c0066f02c84&amp;type=3#Dailogue-Back&quot;);">
                 <ui:Label text="Player One earned a score of 10!" name="Score" style="height: 107px; -unity-text-align: middle-center; font-size: 28px;">

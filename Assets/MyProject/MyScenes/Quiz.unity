@@ -1155,17 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17071844f2f96745b0c3881846840ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quiz: {fileID: 0}
-  endGameScreen: {fileID: 0}
-  questionText: {fileID: 0}
   questionTime: 60
-  timerText: {fileID: 0}
-  scoreText: {fileID: 0}
-  answerButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   questionsPerQuiz: 10
   timeCushionSeconds: 15
   timerRoundingSeconds: 30
@@ -1209,7 +1199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a7c4e19b83d42f4a91c6d0e73b25f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
 --- !u!1 &1765039163
 GameObject:
   m_ObjectHideFlags: 0
@@ -1411,7 +1400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2058593382
 Transform:
   m_ObjectHideFlags: 0
